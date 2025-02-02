@@ -33,7 +33,7 @@ public class Expenses {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type")
-    public Type type;
+    private Type type;
 
     @Column(name = "date_expense")
     private LocalDate dateExpense;

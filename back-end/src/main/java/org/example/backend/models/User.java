@@ -56,4 +56,8 @@ public class User {
     @OneToMany(mappedBy = "user")
     @JsonManagedReference
     private Set<BankAccounts> bankAccounts;
+
+    @OneToOne(mappedBy = "user")
+    @JsonManagedReference
+    private FinancialPlan financialPlan;
 }

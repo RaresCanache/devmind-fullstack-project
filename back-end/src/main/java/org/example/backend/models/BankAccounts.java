@@ -1,6 +1,7 @@
 package org.example.backend.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -8,6 +9,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "bank_accounts")
@@ -37,6 +39,9 @@ public class BankAccounts {
 
     @Column(name = "is_automatic")
     private boolean isAutomatic;
+
+    @OneToMany(mappedBy = "bankAccount")
+    private Set<Transactions> transactions;
 
     @Column(name = "created_at")
     @CreationTimestamp

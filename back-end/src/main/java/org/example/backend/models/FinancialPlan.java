@@ -5,31 +5,35 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "transactions")
+@Table(name = "financial_plan")
 @Data
-public class Transactions {
+public class FinancialPlan {
+    private enum Type {
+        Percent, Fixed;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "bank_account_id")
+    @OneToOne
+    @JoinColumn(name = "user_id")
     @JsonBackReference
-    private BankAccounts bankAccount;
+    private User user;
 
-    @Column(name = "transaction_date")
-    private LocalDate transactionDate;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type")
+    private Type type;
 
-    @Column(name = "vendor")
-    private String vendor;
+    @Column(name = "start_date")
+    private LocalDate startDate;
 
-    @Column(name = "amount", precision = 10, scale = 2)
-    private BigDecimal amount;
+    @Column(name = "end_date")
+    private LocalDate endDate;
 
     @Column(name = "created_at")
     @CreationTimestamp
