@@ -29,8 +29,11 @@ public class BankAccounts {
     private String iban;
 
     //Pentru financial values
-    @Column(name = "currency", precision = 10, scale = 2)
-    private BigDecimal currency;
+    @Column(name = "balance", precision = 10, scale = 2)
+    private BigDecimal balance;
+
+    @Column(name = "currency")
+    private String currency;
 
     @Column(name = "is_automatic")
     private boolean isAutomatic;
