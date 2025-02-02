@@ -7,21 +7,12 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "expenses")
+@Table(name = "bank_accounts")
 @Data
-public class Expenses {
-    private enum Type {
-        Groceries, Transport, Utilities, Subscriptions, Debt, Other;
-    }
-
-    private enum Frequency {
-        Daily, Weekly, Monthly;
-    }
-
+public class BankAccounts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -31,20 +22,18 @@ public class Expenses {
     @JsonBackReference
     private User user;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "type")
-    public Type type;
+    @Column(name = "bank_name")
+    private String bankName;
 
-    @Column(name = "date_expense")
-    private LocalDate dateExpense;
+    @Column(name = "iban")
+    private String iban;
 
-    //Recomandat pt lucrul cu financial values
-    @Column(name = "amount", precision = 10, scale = 2)
-    private BigDecimal amount;
+    //Pentru financial values
+    @Column(name = "currency", precision = 10, scale = 2)
+    private BigDecimal currency;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "frequency")
-    private Frequency frequency;
+    @Column(name = "is_automatic")
+    private boolean isAutomatic;
 
     @Column(name = "created_at")
     @CreationTimestamp
