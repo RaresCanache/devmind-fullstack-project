@@ -14,11 +14,11 @@ import java.time.LocalDateTime;
 @Table(name = "expenses")
 @Data
 public class Expenses {
-    private enum Type {
+    public enum Type {
         Groceries, Transport, Utilities, Subscriptions, Debt, Other;
     }
 
-    private enum Frequency {
+    public enum Frequency {
         Daily, Weekly, Monthly;
     }
 
@@ -34,6 +34,9 @@ public class Expenses {
     @Enumerated(EnumType.STRING)
     @Column(name = "type")
     private Type type;
+
+    @Column(name = "name")
+    private String name;
 
     @Column(name = "date_expense")
     private LocalDate dateExpense;

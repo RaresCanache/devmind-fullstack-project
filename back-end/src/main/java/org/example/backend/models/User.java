@@ -41,14 +41,6 @@ public class User {
     @Column(name = "is_premium")
     private boolean isPremium;
 
-    @Column(name = "created_at")
-    @CreationTimestamp
-    private LocalDateTime createdAt;
-
-    @Column(name = "updated_at")
-    @UpdateTimestamp
-    private LocalDateTime updatedAt;
-
     @OneToMany(mappedBy = "user")
     @JsonManagedReference
     private Set<Expenses> expenses;
@@ -60,4 +52,12 @@ public class User {
     @OneToOne(mappedBy = "user")
     @JsonManagedReference
     private FinancialPlan financialPlan;
+
+    @Column(name = "created_at")
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 }
