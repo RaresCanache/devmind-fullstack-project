@@ -38,9 +38,9 @@ public class BankAccounts {
     private String currency;
 
     @Column(name = "is_automatic")
-    private boolean isAutomatic;
+    private boolean hasAutomaticTransfer;
 
-    @OneToMany(mappedBy = "bankAccount")
+    @OneToMany(mappedBy = "bankAccount", cascade = CascadeType.ALL)
     private Set<Transactions> transactions;
 
     @Column(name = "created_at")

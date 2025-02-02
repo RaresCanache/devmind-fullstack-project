@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Table(name = "financial_plan")
 @Data
 public class FinancialPlan {
-    private enum Type {
+    public enum Type {
         Percent, Fixed;
     }
 
@@ -20,7 +20,7 @@ public class FinancialPlan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     @JsonBackReference
     private User user;

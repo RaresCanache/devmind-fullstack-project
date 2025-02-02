@@ -39,17 +39,17 @@ public class User {
     private String avatarUrl;
 
     @Column(name = "is_premium")
-    private boolean isPremium;
+    private boolean isPremiumUser;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference
     private Set<Expenses> expenses;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference
     private Set<BankAccounts> bankAccounts;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference
     private FinancialPlan financialPlan;
 
