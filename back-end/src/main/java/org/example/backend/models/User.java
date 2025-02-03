@@ -3,13 +3,10 @@ package org.example.backend.models;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -43,11 +40,11 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference
-    private Set<Expenses> expenses;
+    private Set<Expense> expenses;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference
-    private Set<BankAccounts> bankAccounts;
+    private Set<BankAccount> bankAccounts;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference

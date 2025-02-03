@@ -1,4 +1,4 @@
 package org.example.backend.services;
 
-public class TransactionsService {
+public class BankAccountService {
 }

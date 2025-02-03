@@ -1,7 +1,6 @@
 package org.example.backend.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -14,7 +13,7 @@ import java.util.Set;
 @Entity
 @Table(name = "bank_accounts")
 @Data
-public class BankAccounts {
+public class BankAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -41,7 +40,7 @@ public class BankAccounts {
     private boolean hasAutomaticTransfer;
 
     @OneToMany(mappedBy = "bankAccount", cascade = CascadeType.ALL)
-    private Set<Transactions> transactions;
+    private Set<Transaction> transactions;
 
     @Column(name = "created_at")
     @CreationTimestamp

@@ -12,8 +12,8 @@ import java.time.LocalDateTime;
 @Table(name = "financial_plan")
 @Data
 public class FinancialPlan {
-    public enum Type {
-        Percent, Fixed;
+    public enum TypeFinancial {
+        PERCENT, FIXED;
     }
 
     @Id
@@ -27,7 +27,7 @@ public class FinancialPlan {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type")
-    private Type type;
+    private TypeFinancial type;
 
     @Column(name = "start_date")
     private LocalDate startDate;

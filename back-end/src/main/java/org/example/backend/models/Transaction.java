@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "transactions")
 @Data
-public class Transactions {
+public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -20,7 +20,7 @@ public class Transactions {
     @ManyToOne
     @JoinColumn(name = "bank_account_id")
     @JsonBackReference
-    private BankAccounts bankAccount;
+    private BankAccount bankAccount;
 
     @Column(name = "transaction_date")
     private LocalDate transactionDate;

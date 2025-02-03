@@ -2,6 +2,7 @@ package org.example.backend.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import jdk.jfr.Frequency;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -13,13 +14,13 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "expenses")
 @Data
-public class Expenses {
-    public enum Type {
-        Groceries, Transport, Utilities, Subscriptions, Debt, Other;
+public class Expense {
+    public enum TypeExpense {
+        GROCERIES, TRANSPORT, UTILITIES, SUBSCRIPTIONS, DEBT, OTHER;
     }
 
-    public enum Frequency {
-        Daily, Weekly, Monthly;
+    public enum FrequencyExpense {
+        DAILY, WEEKLY, MONTHLY;
     }
 
     @Id
@@ -33,7 +34,7 @@ public class Expenses {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type")
-    private Type type;
+    private TypeExpense type;
 
     @Column(name = "name")
     private String name;
@@ -47,7 +48,7 @@ public class Expenses {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "frequency")
-    private Frequency frequency;
+    private FrequencyExpense frequency;
 
     @Column(name = "created_at")
     @CreationTimestamp
