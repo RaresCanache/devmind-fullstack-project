@@ -11,16 +11,13 @@ public class BankAccountDto {
     @NotNull(message = "Should not be null")
     private Integer userId;
 
-    @NotNull(message = "Should not be null")
-    @NotBlank(message = "Should not be blank")
+    @NotBlank(message = "Should not be null, but it can have a default value")
     private String bankName;
 
-    @NotNull(message = "Should not be null")
-    @NotBlank(message = "Should not be blank")
+    @NotBlank(message = "Should not be null or blank")
     private String iban;
 
-    @NotNull(message = "Should not be null")
-    @NotBlank(message = "Should not be blank")
+    @NotBlank(message = "Should not be null blank")
     @Size(min = 3, max = 3, message = "Currency must be a 3 character code")
     private String currency;
 
