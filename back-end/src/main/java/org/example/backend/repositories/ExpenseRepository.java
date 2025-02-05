@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface ExpenseRepository extends JpaRepository<Expense, Integer> {
     List<Expense> findAllByUser_Id(Integer userId);
+
+    void deleteAllByUser_Id(Integer userId);
 }

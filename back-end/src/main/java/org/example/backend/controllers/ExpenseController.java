@@ -1,5 +1,7 @@
 package org.example.backend.controllers;
 
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.backend.DTOs.ExpenseDto;
@@ -26,5 +28,18 @@ public class ExpenseController {
     @PostMapping("/save")
     public ResponseEntity<Expense> saveExpense(@Valid @RequestBody ExpenseDto expenseDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(expenseService.createExpense(expenseDto));
+    }
+
+    @DeleteMapping("/delete/{expenseId}")
+    public ResponseEntity<String> deleteExpenseById(@PathVariable Integer expenseId) {
+        expenseService.deleteExpenseById(expenseId);
+        return ResponseEntity.ok().body("Successfully deleted expense");
+    }
+
+    @DeleteMapping("/delete/all/{userId}")
+    @Transactional
+    public ResponseEntity<String> deleteAllExpensesByUserId(@PathVariable Integer userId) {
+        expenseService.deleteAllExpensesByUserId(userId);
+        return ResponseEntity.ok().body("Successfully deleted all expenses");
     }
 }
