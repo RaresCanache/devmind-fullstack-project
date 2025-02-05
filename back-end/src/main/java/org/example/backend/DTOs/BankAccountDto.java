@@ -1,4 +1,4 @@
-package org.example.backend.DTO;
+package org.example.backend.DTOs;
 
 import jakarta.validation.constraints.AssertFalse;
 import jakarta.validation.constraints.NotBlank;

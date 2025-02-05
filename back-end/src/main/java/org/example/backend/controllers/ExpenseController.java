@@ -2,7 +2,7 @@ package org.example.backend.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.example.backend.DTO.ExpenseDto;
+import org.example.backend.DTOs.ExpenseDto;
 import org.example.backend.models.Expense;
 import org.example.backend.services.ExpenseServiceImpl;
 import org.springframework.http.HttpStatus;

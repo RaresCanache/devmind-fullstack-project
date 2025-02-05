@@ -1,6 +1,6 @@
 package org.example.backend.service_interface;
 
-import org.example.backend.DTO.ExpenseDto;
+import org.example.backend.DTOs.ExpenseDto;
 import org.example.backend.models.Expense;
 
 import java.util.List;

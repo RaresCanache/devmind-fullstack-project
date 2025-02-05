@@ -1,4 +1,4 @@
-package org.example.backend.DTO;
+package org.example.backend.DTOs;
 
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.FutureOrPresent;
