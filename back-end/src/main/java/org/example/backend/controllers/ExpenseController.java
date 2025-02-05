@@ -42,4 +42,11 @@ public class ExpenseController {
         expenseService.deleteAllExpensesByUserId(userId);
         return ResponseEntity.ok().body("Successfully deleted all expenses");
     }
+
+    @PutMapping("/update/{expenseId}")
+    @Transactional
+    public ResponseEntity<String> updateExpense(@PathVariable Integer expenseId, @RequestBody ExpenseDto expenseDto) {
+        expenseService.updateExpense(expenseId, expenseDto);
+        return ResponseEntity.ok().body("Successfully updated expense");
+    }
 }

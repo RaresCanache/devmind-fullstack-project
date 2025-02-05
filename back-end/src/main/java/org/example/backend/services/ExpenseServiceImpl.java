@@ -11,6 +11,7 @@ import org.example.backend.repositories.UserRepository;
 import org.example.backend.service_interface.ExpenseService;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -58,7 +59,22 @@ public class ExpenseServiceImpl implements ExpenseService {
     @Override
     public void updateExpense(Integer expenseId, ExpenseDto expenseDto) {
         Expense existingExpense = expenseRepository.findById(expenseId).orElseThrow(() -> new EntityNotFoundException("Expense not found"));
-        expenseMapper.updateExpenseFromDto(existingExpense, expenseDto);
+
+        if (expenseDto.getType() != null) {
+            existingExpense.setType(expenseDto.getType());
+        }
+        if (expenseDto.getName() != null) {
+            existingExpense.setName(expenseDto.getName());
+        }
+        if (expenseDto.getDateExpense() != null) {
+            existingExpense.setDateExpense(expenseDto.getDateExpense());
+        }
+        if (expenseDto.getAmount() != null && expenseDto.getAmount().compareTo(BigDecimal.ZERO) > 0) {
+            existingExpense.setAmount(expenseDto.getAmount());
+        }
+        if (expenseDto.getFrequency() != null) {
+            existingExpense.setFrequency(expenseDto.getFrequency());
+        }
         expenseRepository.save(existingExpense);
     }
 }

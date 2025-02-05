@@ -10,6 +10,4 @@ public interface ExpenseMapper {
     Expense toModel(ExpenseDto expenseDto);
 
     ExpenseDto toDto(Expense expense);
-
-    void updateExpenseFromDto(@MappingTarget Expense existingExpense, ExpenseDto expenseDto);
 }
