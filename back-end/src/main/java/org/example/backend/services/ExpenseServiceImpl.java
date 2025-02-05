@@ -6,22 +6,24 @@ import org.example.backend.models.Expense;
 import org.example.backend.models.User;
 import org.example.backend.repositories.ExpenseRepository;
 import org.example.backend.repositories.UserRepository;
+import org.example.backend.service_interface.ExpenseService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class ExpenseService {
+public class ExpenseServiceImpl implements ExpenseService {
     private final ExpenseRepository expenseRepository;
 
     private final UserRepository userRepository;
 
+    @Override
     public List<Expense> getAllExpensesByUserId(Integer userId) {
         return expenseRepository.findAllByUser_Id(userId);
     }
 
+    @Override
     public Expense createExpense(ExpenseDto expenseDto) {
         Expense expense = new Expense();
         User user = userRepository.findById(expenseDto.getUserId()).orElseThrow();
