@@ -3,6 +3,8 @@ package org.example.backend.services;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.example.backend.DTOs.ExpenseDto;
+import org.example.backend.exception_handlers.ExpenseNotFoundException;
+import org.example.backend.exception_handlers.UserNotFoundException;
 import org.example.backend.mappers.ExpenseMapper;
 import org.example.backend.models.Expense;
 import org.example.backend.models.User;
@@ -26,7 +28,7 @@ public class ExpenseServiceImpl implements ExpenseService {
     @Override
     public List<Expense> getAllExpensesByUserId(Integer userId) {
         if (!userRepository.existsById(userId)) {
-            throw new EntityNotFoundException("User not found");
+            throw new UserNotFoundException("User with id: " + userId + " not found");
         }
         return expenseRepository.findAllByUser_Id(userId);
     }
@@ -34,7 +36,8 @@ public class ExpenseServiceImpl implements ExpenseService {
     @Override
     public Expense createExpense(ExpenseDto expenseDto) {
         Expense expense = expenseMapper.toModel(expenseDto);
-        User user = userRepository.findById(expenseDto.getUserId()).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        User user = userRepository.findById(expenseDto.getUserId())
+                .orElseThrow(() -> new UserNotFoundException("User with id: " + expenseDto.getUserId() + " not found"));
         expense.setUser(user);
 
         return expenseRepository.save(expense);
@@ -43,7 +46,7 @@ public class ExpenseServiceImpl implements ExpenseService {
     @Override
     public void deleteExpenseById(Integer expenseId) {
         if (!expenseRepository.existsById(expenseId)) {
-            throw new EntityNotFoundException("Expense not found");
+            throw new ExpenseNotFoundException("Expense with id:" + expenseId + " not found");
         }
         expenseRepository.deleteById(expenseId);
     }
@@ -51,14 +54,14 @@ public class ExpenseServiceImpl implements ExpenseService {
     @Override
     public void deleteAllExpensesByUserId(Integer userId) {
         if (!userRepository.existsById(userId)) {
-            throw new EntityNotFoundException("User not found");
+            throw new EntityNotFoundException("User with id: " + userId + " not found");
         }
         expenseRepository.deleteAllByUser_Id(userId);
     }
 
     @Override
     public void updateExpense(Integer expenseId, ExpenseDto expenseDto) {
-        Expense existingExpense = expenseRepository.findById(expenseId).orElseThrow(() -> new EntityNotFoundException("Expense not found"));
+        Expense existingExpense = expenseRepository.findById(expenseId).orElseThrow(() -> new ExpenseNotFoundException("Expense with id:" + expenseId + " not found"));
 
         if (expenseDto.getType() != null) {
             existingExpense.setType(expenseDto.getType());
