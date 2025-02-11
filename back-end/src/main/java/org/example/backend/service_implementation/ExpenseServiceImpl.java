@@ -1,4 +1,4 @@
-package org.example.backend.services;
+package org.example.backend.service_implementation;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -46,7 +46,7 @@ public class ExpenseServiceImpl implements ExpenseService {
     @Override
     public void deleteExpenseById(Integer expenseId) {
         if (!expenseRepository.existsById(expenseId)) {
-            throw new ExpenseNotFoundException("Expense with id:" + expenseId + " not found");
+            throw new ExpenseNotFoundException("Expense with id: " + expenseId + " not found");
         }
         expenseRepository.deleteById(expenseId);
     }

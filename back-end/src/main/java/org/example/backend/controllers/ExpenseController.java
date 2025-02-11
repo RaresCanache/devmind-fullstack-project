@@ -1,12 +1,11 @@
 package org.example.backend.controllers;
 
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.backend.DTOs.ExpenseDto;
 import org.example.backend.models.Expense;
-import org.example.backend.services.ExpenseServiceImpl;
+import org.example.backend.service_implementation.ExpenseServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
