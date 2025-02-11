@@ -10,6 +10,7 @@ import org.example.backend.models.User;
 import org.example.backend.repositories.BankAccountRepository;
 import org.example.backend.repositories.UserRepository;
 import org.example.backend.service_interface.BankAccountService;
+import org.example.backend.updateDTOs.BankAccountUpdateDto;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -41,7 +42,7 @@ public class BankAccountServiceImpl implements BankAccountService {
 
     @Override
     public List<BankAccount> getAllBankAccountsByUserId(Integer userId) {
-        if (userRepository.existsById(userId)) {
+        if (!userRepository.existsById(userId)) {
             throw new UserNotFoundException("User with id: " + userId + " not found");
         }
 
@@ -49,28 +50,27 @@ public class BankAccountServiceImpl implements BankAccountService {
     }
 
     @Override
-    public void updateBankAccount(Integer bankAccountId, BankAccountDto bankAccountDto) {
-        BankAccount existingBankAccount = bankAccountRepository.findById(bankAccountId).orElseThrow(() -> new BankAccountNotFoundException("Bank account with id: " + bankAccountId + " not found"));
+    public void updateBankAccount(Integer bankAccountId, BankAccountUpdateDto bankAccountUpdateDto) {
+        BankAccount existingBankAccount = bankAccountRepository.findById(bankAccountId)
+                .orElseThrow(() -> new BankAccountNotFoundException("Bank account with id: " + bankAccountId + " not found"));
+        bankAccountMapper.updateBankAccountFromDto(bankAccountUpdateDto, existingBankAccount);
 
-        if (bankAccountDto.getBankName() != null) {
-            existingBankAccount.setBankName(bankAccountDto.getBankName());
-        }
-        if (bankAccountDto.getCurrency() != null && bankAccountDto.getCurrency().length() == 3) {
-            existingBankAccount.setCurrency(bankAccountDto.getCurrency());
-        }
-        if (bankAccountDto.getBalance() != null && bankAccountDto.getBalance().compareTo(BigDecimal.ZERO) >= 0) {
-
-        }
-
+        bankAccountRepository.save(existingBankAccount);
     }
 
     @Override
     public void deleteBankAccountById(Integer bankAccountId) {
-
+        if (!bankAccountRepository.existsById(bankAccountId)) {
+            throw new BankAccountNotFoundException("Bank account with id: " + bankAccountId + " not found");
+        }
+        bankAccountRepository.deleteById(bankAccountId);
     }
 
     @Override
     public void deleteAllBankAccountsByUserId(Integer userId) {
-
+        if (!userRepository.existsById(userId)) {
+            throw new UserNotFoundException("User with id: " + userId + " not found");
+        }
+        bankAccountRepository.deleteAllByUser_Id(userId);
     }
 }

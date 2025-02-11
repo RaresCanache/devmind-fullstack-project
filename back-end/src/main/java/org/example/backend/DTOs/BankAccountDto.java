@@ -21,9 +21,9 @@ public class BankAccountDto {
     private String currency;
 
     @PositiveOrZero(message = "Can be either 0 or a positive balance")
-    @NotNull(message = "Should not e null")
+    @NotNull(message = "Should not be null")
     private BigDecimal balance;
 
     @AssertFalse(message = "It must be a manual account at first. It can be changed afterwards")
-    private boolean is_automatic;
+    private boolean automatic = false;
 }

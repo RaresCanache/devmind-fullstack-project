@@ -50,6 +50,14 @@ public class ExpenseServiceImpl implements ExpenseService {
     }
 
     @Override
+    public void updateExpense(Integer expenseId, ExpenseUpdateDto expenseUpdateDto) {
+        Expense existingExpense = expenseRepository.findById(expenseId).orElseThrow(() -> new ExpenseNotFoundException("Expense with id: " + expenseId + " not found"));
+        expenseMapper.updateExpenseFromDto(expenseUpdateDto, existingExpense);
+
+        expenseRepository.save(existingExpense);
+    }
+
+    @Override
     public void deleteExpenseById(Integer expenseId) {
         if (!expenseRepository.existsById(expenseId)) {
             throw new ExpenseNotFoundException("Expense with id: " + expenseId + " not found");
@@ -63,13 +71,5 @@ public class ExpenseServiceImpl implements ExpenseService {
             throw new EntityNotFoundException("User with id: " + userId + " not found");
         }
         expenseRepository.deleteAllByUser_Id(userId);
-    }
-
-    @Override
-    public void updateExpense(Integer expenseId, ExpenseUpdateDto expenseUpdateDto) {
-        Expense existingExpense = expenseRepository.findById(expenseId).orElseThrow(() -> new ExpenseNotFoundException("Expense with id: " + expenseId + " not found"));
-        expenseMapper.updateExpenseFromDto(expenseUpdateDto, existingExpense);
-
-        expenseRepository.save(existingExpense);
     }
 }

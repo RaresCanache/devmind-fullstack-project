@@ -17,7 +17,7 @@ public class ExpenseDto {
     @NotNull(message = "Should not be null")
     private Expense.TypeExpense type;
 
-    private String name;
+    private String name = "Expense";
 
     @FutureOrPresent(message = "Should be present or future date")
     @NotNull(message = "Should not be null")

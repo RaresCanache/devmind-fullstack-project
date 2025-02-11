@@ -2,11 +2,16 @@ package org.example.backend.mappers;
 
 import org.example.backend.DTOs.BankAccountDto;
 import org.example.backend.models.BankAccount;
+import org.example.backend.updateDTOs.BankAccountUpdateDto;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface BankAccountMapper {
-    public BankAccount toModel(BankAccountDto bankAccountDto);
+    BankAccount toModel(BankAccountDto bankAccountDto);
 
-    public BankAccountDto toDto(BankAccount bankAccount);
+    BankAccountDto toDto(BankAccount bankAccount);
+
+    void updateBankAccountFromDto(BankAccountUpdateDto bankAccountUpdateDto, @MappingTarget BankAccount bankAccount);
 }

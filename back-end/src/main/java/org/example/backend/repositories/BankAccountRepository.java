@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface BankAccountRepository extends JpaRepository<BankAccount, Integer> {
     List<BankAccount> findAllByUser_Id(Integer userId);
+
+    void deleteAllByUser_Id(Integer userId);
 }
