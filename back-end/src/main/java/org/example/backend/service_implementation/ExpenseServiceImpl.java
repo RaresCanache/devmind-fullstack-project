@@ -11,6 +11,7 @@ import org.example.backend.models.User;
 import org.example.backend.repositories.ExpenseRepository;
 import org.example.backend.repositories.UserRepository;
 import org.example.backend.service_interface.ExpenseService;
+import org.example.backend.updateDTOs.ExpenseUpdateDto;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -65,24 +66,10 @@ public class ExpenseServiceImpl implements ExpenseService {
     }
 
     @Override
-    public void updateExpense(Integer expenseId, ExpenseDto expenseDto) {
-        Expense existingExpense = expenseRepository.findById(expenseId).orElseThrow(() -> new ExpenseNotFoundException("Expense with id:" + expenseId + " not found"));
+    public void updateExpense(Integer expenseId, ExpenseUpdateDto expenseUpdateDto) {
+        Expense existingExpense = expenseRepository.findById(expenseId).orElseThrow(() -> new ExpenseNotFoundException("Expense with id: " + expenseId + " not found"));
+        expenseMapper.updateExpenseFromDto(expenseUpdateDto, existingExpense);
 
-        if (expenseDto.getType() != null) {
-            existingExpense.setType(expenseDto.getType());
-        }
-        if (expenseDto.getName() != null) {
-            existingExpense.setName(expenseDto.getName());
-        }
-        if (expenseDto.getDateExpense() != null) {
-            existingExpense.setDateExpense(expenseDto.getDateExpense());
-        }
-        if (expenseDto.getAmount() != null && expenseDto.getAmount().compareTo(BigDecimal.ZERO) > 0) {
-            existingExpense.setAmount(expenseDto.getAmount());
-        }
-        if (expenseDto.getFrequency() != null) {
-            existingExpense.setFrequency(expenseDto.getFrequency());
-        }
         expenseRepository.save(existingExpense);
     }
 }

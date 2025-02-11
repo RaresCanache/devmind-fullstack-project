@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.backend.DTOs.ExpenseDto;
 import org.example.backend.models.Expense;
 import org.example.backend.service_implementation.ExpenseServiceImpl;
+import org.example.backend.updateDTOs.ExpenseUpdateDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +35,13 @@ public class ExpenseController {
         return ResponseEntity.status(HttpStatus.CREATED).body(expenseService.createExpense(expenseDto));
     }
 
+    @PutMapping("/update/{expenseId}")
+    @Transactional
+    public ResponseEntity<String> updateExpense(@PathVariable Integer expenseId, @Valid @RequestBody ExpenseUpdateDto expenseUpdateDto) {
+        expenseService.updateExpense(expenseId, expenseUpdateDto);
+        return ResponseEntity.ok("Successfully updated expense");
+    }
+
     @DeleteMapping("/delete/{expenseId}")
     public ResponseEntity<String> deleteExpenseById(@PathVariable Integer expenseId) {
         expenseService.deleteExpenseById(expenseId);
@@ -45,12 +53,5 @@ public class ExpenseController {
     public ResponseEntity<String> deleteAllExpensesByUserId(@PathVariable Integer userId) {
         expenseService.deleteAllExpensesByUserId(userId);
         return ResponseEntity.ok().body("Successfully deleted all expenses");
-    }
-
-    @PutMapping("/update/{expenseId}")
-    @Transactional
-    public ResponseEntity<String> updateExpense(@PathVariable Integer expenseId, @RequestBody ExpenseDto expenseDto) {
-        expenseService.updateExpense(expenseId, expenseDto);
-        return ResponseEntity.ok("Successfully updated expense");
     }
 }
