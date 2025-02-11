@@ -9,6 +9,8 @@ public interface ExpenseService {
 
     List<Expense> getAllExpensesByUserId(Integer userId);
 
+    Expense getExpenseById(Integer expenseId);
+
     Expense createExpense(ExpenseDto expenseDto);
 
     void deleteExpenseById(Integer expenseId);

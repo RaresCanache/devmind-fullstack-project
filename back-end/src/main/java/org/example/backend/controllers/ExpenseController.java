@@ -18,10 +18,15 @@ import java.util.List;
 public class ExpenseController {
     private final ExpenseServiceImpl expenseService;
 
+    @GetMapping("/{expenseId}")
+    public ResponseEntity<Expense> getExpenseById(@PathVariable Integer expenseId) {
+        return ResponseEntity.ok(expenseService.getExpenseById(expenseId));
+    }
+
     //TODO modify response DTO
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<Expense>> getExpenseByUserId(@PathVariable Integer userId) {
-        return ResponseEntity.ok().body(expenseService.getAllExpensesByUserId(userId));
+        return ResponseEntity.ok(expenseService.getAllExpensesByUserId(userId));
     }
 
     @PostMapping("/save")
@@ -32,7 +37,7 @@ public class ExpenseController {
     @DeleteMapping("/delete/{expenseId}")
     public ResponseEntity<String> deleteExpenseById(@PathVariable Integer expenseId) {
         expenseService.deleteExpenseById(expenseId);
-        return ResponseEntity.ok().body("Successfully deleted expense");
+        return ResponseEntity.ok("Successfully deleted expense");
     }
 
     @DeleteMapping("/delete/all/{userId}")
@@ -46,6 +51,6 @@ public class ExpenseController {
     @Transactional
     public ResponseEntity<String> updateExpense(@PathVariable Integer expenseId, @RequestBody ExpenseDto expenseDto) {
         expenseService.updateExpense(expenseId, expenseDto);
-        return ResponseEntity.ok().body("Successfully updated expense");
+        return ResponseEntity.ok("Successfully updated expense");
     }
 }

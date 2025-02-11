@@ -26,6 +26,11 @@ public class ExpenseServiceImpl implements ExpenseService {
     private final UserRepository userRepository;
 
     @Override
+    public Expense getExpenseById(Integer expenseId) {
+        return expenseRepository.findById(expenseId).orElseThrow(() -> new ExpenseNotFoundException("Expense with id: " + expenseId + " not found"));
+    }
+
+    @Override
     public List<Expense> getAllExpensesByUserId(Integer userId) {
         if (!userRepository.existsById(userId)) {
             throw new UserNotFoundException("User with id: " + userId + " not found");
