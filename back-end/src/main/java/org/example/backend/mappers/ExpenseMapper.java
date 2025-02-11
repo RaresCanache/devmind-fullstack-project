@@ -10,6 +10,7 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface ExpenseMapper {
+    @Mapping(target = "name", defaultValue = "Expense")
     Expense toModel(ExpenseDto expenseDto);
 
     ExpenseDto toDto(Expense expense);

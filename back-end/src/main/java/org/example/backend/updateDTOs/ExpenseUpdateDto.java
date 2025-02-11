@@ -13,7 +13,6 @@ import java.time.LocalDate;
 public class ExpenseUpdateDto {
     private Expense.TypeExpense type;
 
-    @NotNull(message = "Should not be null")
     private String name;
 
     @FutureOrPresent(message = "Should be present or future date")
