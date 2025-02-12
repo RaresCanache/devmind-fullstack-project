@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jdk.jfr.Frequency;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -13,7 +16,9 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "expenses")
-@Data
+@Getter
+@Setter
+@ToString
 public class Expense {
     public enum TypeExpense {
         GROCERIES, TRANSPORT, UTILITIES, SUBSCRIPTIONS, DEBT, OTHER;

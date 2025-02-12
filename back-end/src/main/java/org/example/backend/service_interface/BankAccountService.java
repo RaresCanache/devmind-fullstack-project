@@ -13,7 +13,7 @@ public interface BankAccountService {
 
     BankAccount createBankAccount(BankAccountDto bankAccountDto);
 
-    void updateBankAccount(Integer bankAccountId, BankAccountUpdateDto bankAccountUpdateDto);
+    void updateBankAccountById(Integer bankAccountId, BankAccountUpdateDto bankAccountUpdateDto);
 
     void deleteBankAccountById(Integer bankAccountId);
 

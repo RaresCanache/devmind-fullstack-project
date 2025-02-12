@@ -1,6 +1,5 @@
 package org.example.backend.controllers;
 
-import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.backend.DTOs.ExpenseDto;
@@ -36,9 +35,8 @@ public class ExpenseController {
     }
 
     @PutMapping("/update/{expenseId}")
-    @Transactional
     public ResponseEntity<String> updateExpenseById(@PathVariable Integer expenseId, @Valid @RequestBody ExpenseUpdateDto expenseUpdateDto) {
-        expenseService.updateExpense(expenseId, expenseUpdateDto);
+        expenseService.updateExpenseById(expenseId, expenseUpdateDto);
         return ResponseEntity.ok("Successfully updated expense");
     }
 
@@ -49,7 +47,6 @@ public class ExpenseController {
     }
 
     @DeleteMapping("/delete-all/{userId}")
-    @Transactional
     public ResponseEntity<String> deleteAllExpensesByUserId(@PathVariable Integer userId) {
         expenseService.deleteAllExpensesByUserId(userId);
         return ResponseEntity.ok().body("Successfully deleted all expenses");

@@ -1,6 +1,5 @@
 package org.example.backend.controllers;
 
-import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.backend.DTOs.BankAccountDto;
@@ -35,9 +34,8 @@ public class BankAccountController {
     }
 
     @PutMapping("/update/{bankAccountId}")
-    @Transactional
     public ResponseEntity<String> updateBankAccountById(@PathVariable Integer bankAccountId, @Valid @RequestBody BankAccountUpdateDto bankAccountUpdateDto) {
-        bankAccountService.updateBankAccount(bankAccountId, bankAccountUpdateDto);
+        bankAccountService.updateBankAccountById(bankAccountId, bankAccountUpdateDto);
         return ResponseEntity.ok("Successfully updated bank account");
     }
 
@@ -48,7 +46,6 @@ public class BankAccountController {
     }
 
     @DeleteMapping("/delete-all/{userId}")
-    @Transactional
     public ResponseEntity<String> deleteAllBankAccountsByUserId(@PathVariable Integer userId) {
         bankAccountService.deleteAllBankAccountsByUserId(userId);
         return ResponseEntity.ok("Successfully deleted all bank accounts");

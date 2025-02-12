@@ -1,5 +1,6 @@
 package org.example.backend.service_implementation;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.example.backend.DTOs.BankAccountDto;
 import org.example.backend.exception_handlers.BankAccountNotFoundException;
@@ -13,7 +14,6 @@ import org.example.backend.service_interface.BankAccountService;
 import org.example.backend.updateDTOs.BankAccountUpdateDto;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -36,11 +36,13 @@ public class BankAccountServiceImpl implements BankAccountService {
     }
 
     @Override
+    @Transactional
     public BankAccount getBankAccountById(Integer bankAccountId) {
         return bankAccountRepository.findById(bankAccountId).orElseThrow(() -> new BankAccountNotFoundException("Bank account with id: " + bankAccountId + " not found"));
     }
 
     @Override
+    @Transactional
     public List<BankAccount> getAllBankAccountsByUserId(Integer userId) {
         if (!userRepository.existsById(userId)) {
             throw new UserNotFoundException("User with id: " + userId + " not found");
@@ -50,15 +52,15 @@ public class BankAccountServiceImpl implements BankAccountService {
     }
 
     @Override
-    public void updateBankAccount(Integer bankAccountId, BankAccountUpdateDto bankAccountUpdateDto) {
+    public void updateBankAccountById(Integer bankAccountId, BankAccountUpdateDto bankAccountUpdateDto) {
         BankAccount existingBankAccount = bankAccountRepository.findById(bankAccountId)
                 .orElseThrow(() -> new BankAccountNotFoundException("Bank account with id: " + bankAccountId + " not found"));
         bankAccountMapper.updateBankAccountFromDto(bankAccountUpdateDto, existingBankAccount);
-
         bankAccountRepository.save(existingBankAccount);
     }
 
     @Override
+    @Transactional
     public void deleteBankAccountById(Integer bankAccountId) {
         if (!bankAccountRepository.existsById(bankAccountId)) {
             throw new BankAccountNotFoundException("Bank account with id: " + bankAccountId + " not found");
@@ -67,6 +69,7 @@ public class BankAccountServiceImpl implements BankAccountService {
     }
 
     @Override
+    @Transactional
     public void deleteAllBankAccountsByUserId(Integer userId) {
         if (!userRepository.existsById(userId)) {
             throw new UserNotFoundException("User with id: " + userId + " not found");

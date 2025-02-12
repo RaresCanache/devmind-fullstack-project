@@ -14,7 +14,7 @@ public interface ExpenseService {
 
     Expense createExpense(ExpenseDto expenseDto);
 
-    void updateExpense(Integer expenseId, ExpenseUpdateDto expenseDto);
+    void updateExpenseById(Integer expenseId, ExpenseUpdateDto expenseDto);
 
     void deleteExpenseById(Integer expenseId);
 

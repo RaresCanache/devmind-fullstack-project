@@ -1,6 +1,7 @@
 package org.example.backend.service_implementation;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.example.backend.DTOs.ExpenseDto;
 import org.example.backend.exception_handlers.ExpenseNotFoundException;
@@ -50,7 +51,7 @@ public class ExpenseServiceImpl implements ExpenseService {
     }
 
     @Override
-    public void updateExpense(Integer expenseId, ExpenseUpdateDto expenseUpdateDto) {
+    public void updateExpenseById(Integer expenseId, ExpenseUpdateDto expenseUpdateDto) {
         Expense existingExpense = expenseRepository.findById(expenseId).orElseThrow(() -> new ExpenseNotFoundException("Expense with id: " + expenseId + " not found"));
         expenseMapper.updateExpenseFromDto(expenseUpdateDto, existingExpense);
 
@@ -66,6 +67,7 @@ public class ExpenseServiceImpl implements ExpenseService {
     }
 
     @Override
+    @Transactional
     public void deleteAllExpensesByUserId(Integer userId) {
         if (!userRepository.existsById(userId)) {
             throw new EntityNotFoundException("User with id: " + userId + " not found");
