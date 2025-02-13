@@ -26,13 +26,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserById(Integer userId) {
+    public User getUserById(Integer userId) {
         return userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User with id: " + userId + " not found"));
     }
 
     @Override
-    public List<User> findAllUsers() {
+    public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public void userExistsById(Integer userId) {
+        if (!userRepository.existsById(userId)) {
+            throw new UserNotFoundException("User with id: " + userId + " not found");
+        }
     }
 
     @Override

@@ -25,12 +25,12 @@ public class UserController {
 
     @GetMapping("/{userId}")
     public ResponseEntity<User> getUserById(@PathVariable Integer userId) {
-        return ResponseEntity.ok(userService.findUserById(userId));
+        return ResponseEntity.ok(userService.getUserById(userId));
     }
 
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
-        return ResponseEntity.ok(userService.findAllUsers());
+        return ResponseEntity.ok(userService.getAllUsers());
     }
 
     @PutMapping ("/update/{userId}")

@@ -12,6 +12,7 @@ import org.example.backend.models.User;
 import org.example.backend.repositories.ExpenseRepository;
 import org.example.backend.repositories.UserRepository;
 import org.example.backend.service_interface.ExpenseService;
+import org.example.backend.service_interface.UserService;
 import org.example.backend.updateDTOs.ExpenseUpdateDto;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,7 @@ public class ExpenseServiceImpl implements ExpenseService {
     private final ExpenseRepository expenseRepository;
 
     private final ExpenseMapper expenseMapper;
-
+    private final UserService userService;
     private final UserRepository userRepository;
 
     @Override

@@ -9,9 +9,11 @@ import java.util.List;
 public interface UserService {
     User createUser(UserDto userDto);
 
-    User findUserById(Integer userId);
+    User getUserById(Integer userId);
 
-    List<User> findAllUsers();
+    List<User> getAllUsers();
+
+    void userExistsById(Integer userId);
 
     void updateUserById(Integer userId, UserUpdateDto userUpdateDto);
 
