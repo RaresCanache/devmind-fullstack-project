@@ -3,6 +3,7 @@ package org.example.backend.service_implementation;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.example.backend.DTOs.BankAccountDto;
+import org.example.backend.DTOs.ResponseBankAccountDto;
 import org.example.backend.exception_handlers.BankAccountNotFoundException;
 import org.example.backend.exception_handlers.UserNotFoundException;
 import org.example.backend.mappers.BankAccountMapper;
@@ -25,14 +26,17 @@ public class BankAccountServiceImpl implements BankAccountService {
 
     private final BankAccountMapper bankAccountMapper;
 
+    //TODO Change response
     @Override
-    public BankAccount createBankAccount(BankAccountDto bankAccountDto) {
+    public ResponseBankAccountDto createBankAccount(BankAccountDto bankAccountDto) {
         BankAccount bankAccount = bankAccountMapper.toModel(bankAccountDto);
         User user = userRepository.findById(bankAccountDto.getUserId())
                 .orElseThrow(() -> new UserNotFoundException("User with id: " + bankAccountDto.getUserId() + " not found"));
         bankAccount.setUser(user);
 
-        return bankAccountRepository.save(bankAccount);
+        bankAccountRepository.save(bankAccount);
+        return bankAccountMapper.toDto(bankAccount);
+
     }
 
     @Override

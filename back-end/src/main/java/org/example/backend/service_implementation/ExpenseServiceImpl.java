@@ -51,6 +51,7 @@ public class ExpenseServiceImpl implements ExpenseService {
     }
 
     @Override
+    @Transactional
     public void updateExpenseById(Integer expenseId, ExpenseUpdateDto expenseUpdateDto) {
         Expense existingExpense = expenseRepository.findById(expenseId).orElseThrow(() -> new ExpenseNotFoundException("Expense with id: " + expenseId + " not found"));
         expenseMapper.updateExpenseFromDto(expenseUpdateDto, existingExpense);

@@ -1,6 +1,7 @@
 package org.example.backend.mappers;
 
 import org.example.backend.DTOs.BankAccountDto;
+import org.example.backend.DTOs.ResponseBankAccountDto;
 import org.example.backend.models.BankAccount;
 import org.example.backend.updateDTOs.BankAccountUpdateDto;
 import org.mapstruct.Mapper;
@@ -11,7 +12,7 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 public interface BankAccountMapper {
     BankAccount toModel(BankAccountDto bankAccountDto);
 
-    BankAccountDto toDto(BankAccount bankAccount);
+    ResponseBankAccountDto toDto(BankAccount bankAccount);
 
     void updateBankAccountFromDto(BankAccountUpdateDto bankAccountUpdateDto, @MappingTarget BankAccount bankAccount);
 }

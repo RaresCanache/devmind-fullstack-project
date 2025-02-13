@@ -2,12 +2,12 @@ package org.example.backend.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -20,12 +20,11 @@ public class FinancialPlan {
     public enum TypeFinancialPlan {
         PERCENT, FIXED;
     }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "user_id")
     @JsonBackReference
     private User user;
@@ -36,6 +35,9 @@ public class FinancialPlan {
 
     @Column(name = "start_date")
     private LocalDate startDate;
+
+    @Column(name = "savings", precision = 10, scale = 2)
+    private BigDecimal savings;
 
     @Column(name = "end_date")
     private LocalDate endDate;

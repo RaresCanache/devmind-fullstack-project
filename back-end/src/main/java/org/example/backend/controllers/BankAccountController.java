@@ -3,6 +3,7 @@ package org.example.backend.controllers;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.backend.DTOs.BankAccountDto;
+import org.example.backend.DTOs.ResponseBankAccountDto;
 import org.example.backend.models.BankAccount;
 import org.example.backend.service_interface.BankAccountService;
 import org.example.backend.updateDTOs.BankAccountUpdateDto;
@@ -29,7 +30,7 @@ public class BankAccountController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<BankAccount> saveBankAccountById(@Valid @RequestBody BankAccountDto bankAccountDto) {
+    public ResponseEntity<ResponseBankAccountDto> saveBankAccountById(@Valid @RequestBody BankAccountDto bankAccountDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(bankAccountService.createBankAccount(bankAccountDto));
     }
 
