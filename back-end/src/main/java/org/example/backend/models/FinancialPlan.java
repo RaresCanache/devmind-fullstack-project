@@ -33,11 +33,11 @@ public class FinancialPlan {
     @Column(name = "type")
     private TypeFinancialPlan type;
 
-    @Column(name = "start_date")
-    private LocalDate startDate;
-
     @Column(name = "savings", precision = 10, scale = 2)
     private BigDecimal savings;
+
+    @Column(name = "start_date")
+    private LocalDate startDate;
 
     @Column(name = "end_date")
     private LocalDate endDate;

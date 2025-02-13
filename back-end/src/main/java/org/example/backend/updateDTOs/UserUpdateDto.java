@@ -21,5 +21,7 @@ public class UserUpdateDto {
             message = "password must have digit + lowercase + uppercase + punctuation + symbol")
     private String password;
 
-    private boolean isPremium;
+    private String avatarUrl;
+
+    private boolean premium;
 }

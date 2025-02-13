@@ -24,6 +24,9 @@ public class UserDto {
             message = "password must have digit + lowercase + uppercase + punctuation + symbol")
     private String password;
 
+    @NotBlank(message = "Should not be null or blank")
+    private String avatarUrl;
+
     @AssertFalse(message = "Must be non-premium at first. It can be changed afterwards")
-    private boolean isPremium;
+    private boolean premium = false;
 }

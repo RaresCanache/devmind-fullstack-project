@@ -41,7 +41,7 @@ public class User {
     private String avatarUrl;
 
     @Column(name = "is_premium")
-    private boolean isPremiumUser;
+    private boolean premium;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference
