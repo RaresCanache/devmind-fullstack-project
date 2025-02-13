@@ -30,7 +30,7 @@ public class BankAccountController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<ResponseBankAccountDto> saveBankAccountById(@Valid @RequestBody BankAccountDto bankAccountDto) {
+    public ResponseEntity<ResponseBankAccountDto> saveBankAccount(@Valid @RequestBody BankAccountDto bankAccountDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(bankAccountService.createBankAccount(bankAccountDto));
     }
 
@@ -43,12 +43,12 @@ public class BankAccountController {
     @DeleteMapping("/delete/{bankAccountId}")
     public ResponseEntity<String> deleteBankAccountById(@PathVariable Integer bankAccountId) {
         bankAccountService.deleteBankAccountById(bankAccountId);
-        return ResponseEntity.ok("Successfully deleted bank account");
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Successfully deleted bank account");
     }
 
     @DeleteMapping("/delete-all/{userId}")
     public ResponseEntity<String> deleteAllBankAccountsByUserId(@PathVariable Integer userId) {
         bankAccountService.deleteAllBankAccountsByUserId(userId);
-        return ResponseEntity.ok("Successfully deleted all bank accounts");
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Successfully deleted all bank accounts for user: " + userId);
     }
 }

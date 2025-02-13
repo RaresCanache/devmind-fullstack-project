@@ -36,12 +36,12 @@ public class TransactionController {
     @DeleteMapping("/delete/{transactionId}")
     public ResponseEntity<String> deleteTransactionById(@PathVariable Integer transactionId) {
         transactionService.deleteTransactionById(transactionId);
-        return ResponseEntity.ok("Successfully deleted transaction");
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Successfully deleted transaction");
     }
 
     @DeleteMapping("/delete-all/{bankAccountId}")
     public ResponseEntity<String> deleteAllTransactionsByBankAccountId(@PathVariable Integer bankAccountId) {
         transactionService.deleteAllTransactionsByBankAccountId(bankAccountId);
-        return ResponseEntity.ok().body("Successfully deleted all transactions");
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Successfully deleted all transactions for bank account: " + bankAccountId);
     }
 }

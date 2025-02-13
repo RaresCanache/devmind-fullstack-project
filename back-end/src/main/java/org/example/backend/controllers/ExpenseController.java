@@ -43,12 +43,12 @@ public class ExpenseController {
     @DeleteMapping("/delete/{expenseId}")
     public ResponseEntity<String> deleteExpenseById(@PathVariable Integer expenseId) {
         expenseService.deleteExpenseById(expenseId);
-        return ResponseEntity.ok("Successfully deleted expense");
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Successfully deleted expense");
     }
 
     @DeleteMapping("/delete-all/{userId}")
     public ResponseEntity<String> deleteAllExpensesByUserId(@PathVariable Integer userId) {
         expenseService.deleteAllExpensesByUserId(userId);
-        return ResponseEntity.ok().body("Successfully deleted all expenses");
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Successfully deleted all expenses for user: " + userId);
     }
 }
