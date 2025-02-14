@@ -1,13 +1,8 @@
 package org.example.backend.savings_logic;
 
 import lombok.RequiredArgsConstructor;
-import org.example.backend.exception_handlers.BankAccountNotFoundException;
-import org.example.backend.exception_handlers.FinancialPlanNotFoundException;
 import org.example.backend.models.BankAccount;
 import org.example.backend.models.FinancialPlan;
-import org.example.backend.repositories.BankAccountRepository;
-import org.example.backend.repositories.ExpenseRepository;
-import org.example.backend.repositories.FinancialPlanRepository;
 import org.example.backend.service_interface.BankAccountService;
 import org.example.backend.service_interface.ExpenseService;
 import org.example.backend.service_interface.FinancialPlanService;
@@ -15,6 +10,8 @@ import org.example.backend.service_interface.UserService;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -29,11 +26,11 @@ public class SavingsServiceImpl implements SavingsService {
     private final BankAccountService bankAccountService;
 
     //Here I used ChronoUnit for plans that span over more than 1 year
-    private long noOfDaysFinancialPlan(LocalDate startDate, LocalDate endDate) {
+    private long noDaysFinancialPlan(LocalDate startDate, LocalDate endDate) {
         return ChronoUnit.DAYS.between(startDate, endDate) + 1;
     }
 
-    //Used Lambda expressions for adding all expense amounts
+    //Used Lambda expressions for summing all expense amounts using a reduce function
     private BigDecimal totalExpenses(Integer userId) {
         return expenseService.getAllExpensesByUserId(userId)
                 .stream()
@@ -41,23 +38,41 @@ public class SavingsServiceImpl implements SavingsService {
                 .reduce(BigDecimal.ZERO, (total, amount) -> total.add(amount));
     }
 
-    public List<Integer> computeAmountPerDayForUserIdAndBankAccountId(Integer userId, Integer bankAccountId) {
+    private List<BigDecimal> amountRequiredPerEachDay(BigDecimal balance, BigDecimal toSubtract, long noDays) {
+        List<BigDecimal> amountRequiredPerEachDay = new ArrayList<>();
+
+        for (int i = 0; i < noDays; i++) {
+            balance = balance.subtract(toSubtract);
+            amountRequiredPerEachDay.add(balance.setScale(0, RoundingMode.HALF_UP));
+        }
+        System.out.println(amountRequiredPerEachDay);
+
+        return amountRequiredPerEachDay;
+    }
+
+    public List<BigDecimal> computeAmountPerDayForUserIdAndBankAccountId(Integer userId, Integer bankAccountId) {
         userService.userExistsById(userId);
 
         FinancialPlan financialPlan = financialPlanService.getFinancialPlanById(userId);
 
         BankAccount bankAccount = bankAccountService.getBankAccountById(bankAccountId);
 
-        List<Integer> amountRequiredPerDay = new ArrayList<>();
         LocalDate startDate = financialPlan.getStartDate();
         LocalDate endDate = financialPlan.getEndDate();
 
-        long noDays = noOfDaysFinancialPlan(startDate, endDate);
+        long noDays = noDaysFinancialPlan(startDate, endDate);
 
-        BigDecimal startingBalance = bankAccount.getBalance().subtract(totalExpenses(userId));
+        /*
+        Here we compute the starting balance that remains by subtracting the total amount of all expenses
+        that occur in the period set for the financial plan and subtracting the amount to be saved as well
+        */
+        BigDecimal startingBalance = bankAccount.getBalance().subtract(totalExpenses(userId))
+                .subtract(financialPlan.getSavings());
 
-        System.out.println(startingBalance);
-        return amountRequiredPerDay;
+        //Used rounding half up in case the division quotient has an infinite number of decimals
+        BigDecimal startingBalanceDivByNoDays = startingBalance.divide(BigDecimal.valueOf(noDays), RoundingMode.HALF_UP);
+
+        return amountRequiredPerEachDay(startingBalance, startingBalanceDivByNoDays, noDays);
     }
 
 
