@@ -1,6 +1,6 @@
 import './App.css'
 import {Route, Routes} from "react-router";
-import HomeScreen from "./components/HomeScreen.jsx";
+import HomeScreen from "./components/HomeScreen/HomeScreen.jsx";
 
 function App() {
 
