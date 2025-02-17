@@ -5,13 +5,13 @@ const HomeScreen = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="container">
+        <div className="home-container">
             <h1 style={{fontSize: "60px"}}>Welcome to my app</h1>
             <div>
-                <button onClick={() => navigate("login")}>
+                <button className="home-button" onClick={() => navigate("login")}>
                     Login
                 </button>
-                <button onClick={() => navigate("register")}>
+                <button className="home-button" onClick={() => navigate("register")}>
                     Register
                 </button>
             </div>

@@ -1,0 +1,11 @@
+.active {
+    color: blueviolet;
+    border: 3px solid blueviolet;
+    font-size: 25px;
+    padding: 5px;
+}
+
+.not-active {
+    color: white;
+    font-size: 25px;
+}

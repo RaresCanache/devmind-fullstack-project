@@ -1,14 +1,17 @@
 import './App.css'
 import {Route, Routes} from "react-router";
 import HomeScreen from "./components/HomeScreen/HomeScreen.jsx";
+import Login from "./components/Login/Login.jsx";
+import Header from "./components/Header/Header.jsx";
 
 function App() {
 
     return (
         <>
+            <Header/>
             <Routes>
                 <Route path="" element={<HomeScreen/>}/>
-                <Route path="login"/>
+                <Route path="login" element={<Login/>}/>
             </Routes>
         </>
     );
