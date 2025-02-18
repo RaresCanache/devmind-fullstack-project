@@ -6,15 +6,12 @@ import lombok.Data;
 @Data
 public class UserDto {
     @NotBlank(message = "Should not be null or blank")
-    @Size(max = 45)
     private String username;
 
     @NotBlank(message = "Should not be null or blank")
-    @Size(max = 45)
     private String firstName;
 
     @NotBlank(message = "Should not be null or blank")
-    @Size(max = 45)
     private String lastName;
 
     @Email

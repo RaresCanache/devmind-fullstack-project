@@ -25,7 +25,6 @@ public class ExpenseServiceImpl implements ExpenseService {
     private final ExpenseRepository expenseRepository;
 
     private final ExpenseMapper expenseMapper;
-    private final UserService userService;
     private final UserRepository userRepository;
 
     @Override
