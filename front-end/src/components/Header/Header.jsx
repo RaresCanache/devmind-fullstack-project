@@ -7,14 +7,12 @@ const Header = () => {
     const user = useSelector(state => state.user.user);
 
     return (
-        <div>
-            <div style={{
-                position: "sticky",
-                backgroundColor: "lightslategray",
-                display: "flex",
-                justifyContent: "space-evenly",
-                alignItems: "center",
-            }}>
+        <div style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+        }}>
+            <div className="nav-bar">
                 <NavLink to="" className={({isActive}) => isActive ? "active" : "not-active"}>
                     Home
                 </NavLink>
@@ -25,15 +23,15 @@ const Header = () => {
                     Register
                 </NavLink>
             </div>
-            <div>
-                {user && (
-                    <div>
-                        //TODO To implement UserDrawer
-                        <Drawer open onClose={}>
+            {/*<div>*/}
+            {/*    {user && (*/}
+            {/*        <div>*/}
+            {/*            //TODO To implement UserDrawer*/}
+            {/*            /!*<Drawer open onClose={}>*!/*/}
 
-                        </Drawer>
-                    </div>)}
-            </div>
+            {/*            /!*</Drawer>*!/*/}
+            {/*        </div>)}*/}
+            {/*</div>*/}
         </div>
     );
 };

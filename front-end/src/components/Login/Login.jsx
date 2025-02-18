@@ -8,13 +8,11 @@ import {getUserById} from "../../APIs/UserAPI.js";
 const Login = () => {
     const [userId, setUserId] = useState(0);
     const dispatch = useDispatch();
-    const [userData, setUserData] = useState(undefined);
 
     const handleClick = async () => {
         try {
             const response = await getUserById(userId);
             const data = await response.json();
-            setUserData(data);
 
             dispatch(setUser(data));
             console.log("Fetched User:", data);
