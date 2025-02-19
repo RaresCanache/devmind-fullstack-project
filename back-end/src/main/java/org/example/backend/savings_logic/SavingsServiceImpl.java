@@ -45,7 +45,6 @@ public class SavingsServiceImpl implements SavingsService {
             balance = balance.subtract(toSubtract);
             amountRequiredPerEachDay.add(balance.setScale(0, RoundingMode.HALF_UP));
         }
-        System.out.println(amountRequiredPerEachDay);
 
         return amountRequiredPerEachDay;
     }
