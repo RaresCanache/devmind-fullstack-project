@@ -12,8 +12,6 @@ public interface UserService {
 
     User getUserById(Integer userId);
 
-    User getUserByEmail(String email);
-
     List<User> getAllUsers();
 
     String authenticate(String email, String password);
