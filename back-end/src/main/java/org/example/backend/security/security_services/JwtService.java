@@ -1,10 +1,8 @@
 package org.example.backend.security.security_services;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.impl.DefaultClaims;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,7 +19,7 @@ public class JwtService {
     @Value("${jwt.accessTokenValidityMS}")
     private int jwtExpirationMs;
 
-    public String createToken(String email) {
+    public String createToken(String email, boolean isPremium) {
         SecretKey key = Keys.hmacShaKeyFor(secret.getBytes());
 
         //TODO de extras premium din database
@@ -29,13 +27,14 @@ public class JwtService {
                 .header()
                 .and()
                 .subject(email)
+                .claim("roles", isPremium ? "ROLE_PREMIUM" : "ROLE_FREE")
                 .issuedAt(new Date())
                 .expiration(new Date((new Date()).getTime() + jwtExpirationMs))
                 .signWith(key)
                 .compact();
     }
 
-    public String validateToken(String token) {
+    public Claims validateToken(String token) {
         SecretKey key = Keys.hmacShaKeyFor(secret.getBytes());
 
         JwtParser parser = Jwts.parser()
@@ -43,8 +42,7 @@ public class JwtService {
                 .build();
 
         try {
-            Claims claims = (Claims) parser.parse(token.substring(token.indexOf(" ") + 1)).getPayload();
-            return claims.getSubject();
+            return (Claims) parser.parse(token.substring(token.indexOf(" ") + 1)).getPayload();
         } catch (Exception e) {
             throw new UsernameNotFoundException("Invalid token");
         }
