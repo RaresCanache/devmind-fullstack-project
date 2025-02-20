@@ -18,7 +18,7 @@ public class SecurityController {
 
     @PostMapping("/login")
     public String login(@Valid @RequestBody UserLoginDto userLoginDto) {
-        return userLoginService.authenticate(userLoginDto.getUsername(), userLoginDto.getPassword());
+        return userLoginService.authenticate(userLoginDto.getEmail(), userLoginDto.getPassword());
     }
 
     @GetMapping("/whoami")

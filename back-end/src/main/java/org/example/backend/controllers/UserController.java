@@ -4,6 +4,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.backend.DTOs.UserDto;
 import org.example.backend.models.User;
+import org.example.backend.security.loginDto.UserLoginDto;
+import org.example.backend.security.security_services.UserLoginService;
 import org.example.backend.service_interface.UserService;
 import org.example.backend.updateDTOs.UserUpdateDto;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    private final UserLoginService userLoginService;
+
+    @PostMapping("/login")
+    public String login(@Valid @RequestBody UserLoginDto userLoginDto) {
+        return userLoginService.authenticate(userLoginDto.getEmail(), userLoginDto.getPassword());
+    }
 
     @PostMapping("/save")
     public ResponseEntity<User> saveUser(@Valid @RequestBody UserDto userDto) {

@@ -1,50 +1,38 @@
 package org.example.backend.security.security_services;
 
 import lombok.RequiredArgsConstructor;
+import org.example.backend.models.User;
 import org.example.backend.security.UserLoginMock;
+import org.example.backend.service_interface.UserService;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class UserLoginService {
-    //TODO Am baza de date, nu mai trebuie o lista de useri, de sters
-    private static final List<UserLoginMock> userList = new ArrayList<>();
-
     private final PasswordEncoder passwordEncoder;
-
     private final JwtService jwtService;
+    private final UserService userService;
 
-    public void addUser(UserLoginMock userLoginMock) {
-        userList.add(userLoginMock);
-    }
-    //TODO Stream ul este de fapt findById din UserServiceImpl, de inlocuit
-    public String authenticate(String username, String password) {
-        UserLoginMock user = userList.stream()
-                .filter(u -> u.getUsername().equals(username))
-                .filter(u -> passwordEncoder.matches(password, u.getPassword()))
-                .findFirst().orElse(null);
+    public String authenticate(String email, String password) {
+        User user = userService.getUserByEmail(email);
 
-        if (null != user) {
-            return jwtService.createToken(username);
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            throw new BadCredentialsException("Invalid email or password");
         }
 
-        throw new UsernameNotFoundException("Invalid username or password");
+        return jwtService.createToken(email);
     }
 
     //TODO inlocuieste UserLoginMock cu entitatea User
-    public UserLoginMock validateUser(String token) {
-        String username = jwtService.validateToken(token);
+    public User validateUser(String token) {
+        String email = jwtService.validateToken(token);
 
-        return userList.stream()
-                .filter(u -> u.getUsername().equals(username))
-                .findFirst()
-                .orElse(null);
+        return userService.getUserByEmail(email);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")

@@ -11,6 +11,8 @@ public interface UserService {
 
     User getUserById(Integer userId);
 
+    User getUserByEmail(String email);
+
     List<User> getAllUsers();
 
     void userExistsById(Integer userId);

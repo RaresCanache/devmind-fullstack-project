@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class UserLoginDto {
-    @Email
+    @Email (message = "Should be a valid email")
     private String email;
 
     @NotBlank(message = "Should not be blank")

@@ -1,5 +1,6 @@
 package org.example.backend.security.security_services;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
@@ -20,18 +21,17 @@ public class JwtService {
     @Value("${jwt.accessTokenValidityMS}")
     private int jwtExpirationMs;
 
-    public String createToken(String username) {
+    public String createToken(String email) {
         SecretKey key = Keys.hmacShaKeyFor(secret.getBytes());
 
         //TODO de extras premium din database
         return Jwts.builder()
                 .header()
                 .and()
-                .subject(username)
+                .subject(email)
                 .issuedAt(new Date())
                 .expiration(new Date((new Date()).getTime() + jwtExpirationMs))
                 .signWith(key)
-                .claim()
                 .compact();
     }
 
@@ -43,8 +43,8 @@ public class JwtService {
                 .build();
 
         try {
-            Jwt jwt = parser.parse(token.substring(token.indexOf(" ") + 1));
-            return ((DefaultClaims) (jwt.getPayload())).getSubject();
+            Claims claims = (Claims) parser.parse(token.substring(token.indexOf(" ") + 1)).getPayload();
+            return claims.getSubject();
         } catch (Exception e) {
             throw new UsernameNotFoundException("Invalid token");
         }
