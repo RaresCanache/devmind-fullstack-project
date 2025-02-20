@@ -23,8 +23,8 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/users/login").permitAll()
-                        .requestMatchers("/users/register").permitAll()
+                        .requestMatchers("/users/login", "/users/register").permitAll()
+                        .requestMatchers("/users/all", "/users/delete-all").hasRole("PREMIUM")
                         .anyRequest().authenticated())
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

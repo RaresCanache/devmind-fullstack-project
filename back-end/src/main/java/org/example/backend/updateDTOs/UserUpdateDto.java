@@ -17,7 +17,7 @@ public class UserUpdateDto {
     @Email
     private String email;
 
-    @Pattern(regexp = "^(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!])[A-Za-z\\d@#$%^&+=!]+$",
+    @Pattern(regexp = "^(?=.*[A-Z])(?=.*\\d)(?=.*[\\W_]).+$",
             message = "password must have digit + lowercase + uppercase + symbol")
     private String password;
 
