@@ -2,100 +2,47 @@ import {useDispatch} from "react-redux";
 import "./Login.css";
 import {TextField} from "@mui/material";
 import {useState} from "react";
-import {setUser} from "../../redux/reducers/userReducer.js";
-import {getUserById} from "../../APIs/UserAPI.js";
+import {setUserAndToken} from "../../redux/reducers/userReducer.js";
+import {authenticateUser, getUserByEmail} from "../../APIs/UserAPI.js";
 
 const Login = () => {
-    const [userId, setUserId] = useState(0);
     const dispatch = useDispatch();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
     const handleClick = async () => {
         try {
-            const response = await getUserById(userId);
-            const data = await response.json();
+            const tokenResponse = await authenticateUser(email, password);
+            const token = await tokenResponse.text();
 
-            dispatch(setUser(data));
-            console.log("Fetched User:", data);
+            const userResponse = await getUserByEmail(email, token);
+            const userData = await userResponse.json();
+
+            dispatch(setUserAndToken({
+                user: userData,
+                bearerToken: token,
+            }))
+
         } catch (error) {
-            console.error("Error fetching user:", error);
+            console.error("Error authenticating user: ", error);
         }
     };
 
     return (
-        <div className="login-container">
-            <TextField
-                label="Email"
-                type="email"
-                margin="normal"
-                required="required"
-                sx={{
-                    "& .MuiInputLabel-root": {
-                        color: "blueviolet",
-                    },
-                    "& .MuiInputBase-input": {
-                        color: "blueviolet",
-                    },
-                    "& .MuiOutlinedInput-root": {
-                        "& fieldset": {
-                            border: "3px solid black",
-                        },
-                        "&:hover fieldset": {
-                            borderColor: "blueviolet",
-                        },
-                        "&.Mui-focused fieldset": {
-                            borderColor: "blueviolet",
-                        },
-                    },
-                }}
-            />
-            <TextField
-                label="Password"
-                type="password"
-                margin="normal"
-                required="required"
-                sx={{
-                    "& .MuiInputLabel-root": {
-                        color: "blueviolet"
-                    },
-                    "& .MuiInputBase-input": {
-                        color: "blueviolet",
-                    },
-                    "& .MuiOutlinedInput-root": {
-                        "& fieldset": {
-                            border: "3px solid black",
-                        },
-                        "&:hover fieldset": {
-                            borderColor: "blueviolet",
-                        },
-                        "&.Mui-focused fieldset": {
-                            borderColor: "blueviolet",
-                        },
-                    },
-                }}
-            />
-            <div style={{
-                margin: "15px"
-            }}>
-                <button className="login-button" onClick={handleClick}>
-                    Login
-                </button>
+            <div className="login-container">
                 <TextField
-                    id="outlined-number"
-                    label="User ID"
-                    type="number"
-                    value={userId}
-                    onChange={(event) => setUserId(event.target.value)}
-                    slotProps={{
-                        inputLabel: {
-                            shrink: true,
-                        },
-                    }}
+                    label="Email"
+                    type="email"
+                    margin="normal"
+                    required
+                    value={email}
+                    onChange={event => setEmail(event.target.value)}
                     sx={{
-                        "& .MuiFormLabel-root": {
+                        "& .MuiInputLabel-root": {
                             color: "blueviolet",
                         },
                         "& .MuiInputBase-input": {
-                            color: "white",
+                            color: "blueviolet",
                         },
                         "& .MuiOutlinedInput-root": {
                             "& fieldset": {
@@ -106,12 +53,45 @@ const Login = () => {
                             },
                             "&.Mui-focused fieldset": {
                                 borderColor: "blueviolet",
-                                color: "blueviolet"
                             },
-                        }
-                    }}/>
+                        },
+                    }}
+                />
+                <TextField
+                    label="Password"
+                    type="password"
+                    margin="normal"
+                    required
+                    value={password}
+                    onChange={event => setPassword(event.target.value)}
+                    sx={{
+                        "& .MuiInputLabel-root": {
+                            color: "blueviolet"
+                        },
+                        "& .MuiInputBase-input": {
+                            color: "blueviolet",
+                        },
+                        "& .MuiOutlinedInput-root": {
+                            "& fieldset": {
+                                border: "3px solid black",
+                            },
+                            "&:hover fieldset": {
+                                borderColor: "blueviolet",
+                            },
+                            "&.Mui-focused fieldset": {
+                                borderColor: "blueviolet",
+                            },
+                        },
+                    }}
+                />
+                <div style={{
+                    margin: "15px"
+                }}>
+                    <button className="login-button" onClick={handleClick}>
+                        Login
+                    </button>
+                </div>
             </div>
-        </div>
     );
 };
 

@@ -2,15 +2,19 @@ import {NavLink} from "react-router";
 import "./Header.css"
 import {useSelector} from "react-redux";
 import {Drawer} from "@mui/material";
+import {useState} from "react";
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const Header = () => {
     const user = useSelector(state => state.user.user);
+    const [openDrawer, setOpenDrawer] = useState(false);
+
+    const toggleDrawer = (toggled) => setOpenDrawer(toggled);
 
     return (
         <div style={{
             display: "flex",
             justifyContent: "center",
-            alignItems: "center"
         }}>
             <div className="nav-bar">
                 <NavLink to="" className={({isActive}) => isActive ? "active" : "not-active"}>
@@ -23,15 +27,17 @@ const Header = () => {
                     Register
                 </NavLink>
             </div>
-            {/*<div>*/}
-            {/*    {user && (*/}
-            {/*        <div>*/}
-            {/*            //TODO To implement UserDrawer*/}
-            {/*            /!*<Drawer open onClose={}>*!/*/}
+            <div>
+                {user && (
+                    <div className="user-drawer">
+                        <button className="user-drawer-button" onClick={() => toggleDrawer(true)}>
+                            <ArrowForwardIosIcon/>
+                        </button>
+                        <Drawer open={openDrawer} onClose={() => toggleDrawer(false)}>
 
-            {/*            /!*</Drawer>*!/*/}
-            {/*        </div>)}*/}
-            {/*</div>*/}
+                        </Drawer>
+                    </div>)}
+            </div>
         </div>
     );
 };

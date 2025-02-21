@@ -1,4 +1,30 @@
 body {
-    background-color: #282c34;
+    background-color: #3c3c3c;
     color: blueviolet;
+}
+
+.background-container {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.blurred-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("/src/assets/calendar_2.jpg"); /* Add your image URL */
+    background-size: cover;
+    background-position: center;
+    filter: blur(10px) brightness(75%); /* Adjust the blur intensity */
+    z-index: -1; /* Make sure the background is behind the content */
+}
+
+.content {
+    position: relative;
+    z-index: 1; /* Place the content in front of the blurred background */
+    text-align: center;
+    padding: 20px;
 }

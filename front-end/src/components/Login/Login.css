@@ -1,7 +1,10 @@
 .login-container {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
+    height: 80vh;
+    z-index: 1;
 }
 
 button.login-button {
