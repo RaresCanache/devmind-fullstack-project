@@ -2,6 +2,7 @@ package org.example.backend.service_interface;
 
 import org.example.backend.DTOs.UserDto;
 import org.example.backend.models.User;
+import org.example.backend.security.loginDto.TokenResponseDto;
 import org.example.backend.updateDTOs.UserUpdateDto;
 import org.mapstruct.control.MappingControl;
 
@@ -16,7 +17,7 @@ public interface UserService {
 
     List<User> getAllUsers();
 
-    String authenticate(String email, String password);
+    TokenResponseDto authenticate(String email, String password);
 
     void userExistsById(Integer userId);
 

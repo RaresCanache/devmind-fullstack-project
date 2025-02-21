@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.backend.DTOs.UserDto;
 import org.example.backend.models.User;
+import org.example.backend.security.loginDto.TokenResponseDto;
 import org.example.backend.security.loginDto.UserLoginDto;
 import org.example.backend.service_interface.UserService;
 import org.example.backend.updateDTOs.UserUpdateDto;
@@ -21,8 +22,8 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/login")
-    public String login(@Valid @RequestBody UserLoginDto userLoginDto) {
-        return userService.authenticate(userLoginDto.getEmail(), userLoginDto.getPassword());
+    public ResponseEntity<TokenResponseDto> login(@Valid @RequestBody UserLoginDto userLoginDto) {
+        return ResponseEntity.ok(userService.authenticate(userLoginDto.getEmail(), userLoginDto.getPassword()));
     }
 
     @PostMapping("/register")
