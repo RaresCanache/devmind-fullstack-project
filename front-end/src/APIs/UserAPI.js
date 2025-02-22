@@ -8,8 +8,16 @@ export const authenticateUser = async (email, password) => fetch(`${BASE_URL}/us
     body: JSON.stringify({email, password}),
 });
 
-export const getUserByEmail = (email, bearerToken) => fetch(`${BASE_URL}/users/email/${email}`, {
+export const getUserByEmail = async (email, bearerToken) => fetch(`${BASE_URL}/users/email/${email}`, {
     headers: {
-        "Authorization": `Bearer ${bearerToken}`
-    }
+        Authorization: `Bearer ${bearerToken}`
+    },
 });
+
+export const registerUser = async (newUser) => fetch(`${BASE_URL}/users/register`, {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify(newUser),
+})

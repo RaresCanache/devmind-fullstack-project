@@ -3,8 +3,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 80vh;
-    z-index: 1;
+    height: 90vh;
+}
+.login-container-inner {
+    display: flex;
+    flex-direction: column;
+    background-color: mintcream;
+    padding: 20px;
+    border-radius: 10px;
 }
 
 button.login-button {
@@ -19,6 +25,8 @@ button.login-button {
     margin: 10px;
     cursor: pointer;
     transition-duration: 0.3s;
+    align-self: center;
+    width: 30%;
 }
 
 button.login-button:hover {

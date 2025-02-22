@@ -12,11 +12,8 @@ const Header = () => {
     const toggleDrawer = (toggled) => setOpenDrawer(toggled);
 
     return (
-        <div style={{
-            display: "flex",
-            justifyContent: "center",
-        }}>
-            <div className="nav-bar">
+        <div className="nav-bar">
+            <div className="inner-nav-bar">
                 <NavLink to="" className={({isActive}) => isActive ? "active" : "not-active"}>
                     Home
                 </NavLink>

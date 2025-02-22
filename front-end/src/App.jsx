@@ -3,6 +3,7 @@ import {Route, Routes} from "react-router";
 import HomeScreen from "./components/HomeScreen/HomeScreen.jsx";
 import Login from "./components/Login/Login.jsx";
 import Header from "./components/Header/Header.jsx";
+import Register from "./components/Register/Register.jsx";
 
 function App() {
 
@@ -12,6 +13,7 @@ function App() {
             <Routes>
                 <Route path="" element={<HomeScreen/>}/>
                 <Route path="login" element={<Login/>}/>
+                <Route path="register" element={<Register/>}/>
             </Routes>
         </>
     );

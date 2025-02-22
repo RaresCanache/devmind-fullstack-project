@@ -1,0 +1,22 @@
+.register-container {
+    display: flex;
+    flex-direction: column;
+    justify-Content: center;
+    align-Items: center;
+    height: 80vh;
+}
+
+.register-container-inner {
+    background-color: mintcream;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    gap: 15px;
+}
+
+.register-text-area {
+    display: flex;
+    gap: 25px;
+}
+
