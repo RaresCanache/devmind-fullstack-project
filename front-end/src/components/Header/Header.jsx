@@ -24,17 +24,6 @@ const Header = () => {
                     Register
                 </NavLink>
             </div>
-            <div>
-                {user && (
-                    <div className="user-drawer">
-                        <button className="user-drawer-button" onClick={() => toggleDrawer(true)}>
-                            <ArrowForwardIosIcon/>
-                        </button>
-                        <Drawer open={openDrawer} onClose={() => toggleDrawer(false)}>
-
-                        </Drawer>
-                    </div>)}
-            </div>
         </div>
     );
 };

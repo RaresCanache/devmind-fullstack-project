@@ -3,6 +3,7 @@ import {textFieldMuiStyles} from "../TextFieldMUIStyles/TextFieldMuiStyles.js";
 import {TextField} from "@mui/material";
 import {useState} from "react";
 import {registerUser} from "../../APIs/UserAPI.js";
+import {useNavigate} from "react-router";
 
 const Register = () => {
     const [newUser, setNewUser] = useState({
@@ -13,6 +14,10 @@ const Register = () => {
         password: "",
         avatarUrl: "",
     });
+    const [loadingRegister, setLoadingRegister] = useState(false);
+    const [successfullRegistration, setSuccessfullRegistration] = useState(false);
+    const navigate = useNavigate();
+
     //TODO verifica ca un User s a inregistrat
     const handleChange = (event) => {
         setNewUser({
@@ -22,12 +27,23 @@ const Register = () => {
     };
 
     const handleRegister = async () => {
+        setSuccessfullRegistration(false);
+        setLoadingRegister(true);
         try {
             const response = await registerUser(newUser);
+
+            if (!response.ok) {
+                throw new Error("Could not register user");
+            }
             const userResponse = await response.json();
             console.log(userResponse);
+
+            setSuccessfullRegistration(true);
+            setTimeout(() => navigate("/dashboard"), 2000);
         } catch (error) {
             console.error("Error registering user: ", error);
+        } finally {
+            setLoadingRegister(false);
         }
     };
 
@@ -99,8 +115,9 @@ const Register = () => {
                     />
                 </div>
             </div>
-            <button className="home-button" onClick={handleRegister}>
-                Register
+            <button className="home-button" onClick={handleRegister} disabled={loadingRegister || successfullRegistration}>
+                {successfullRegistration ? <span style={{color: "chartreuse"}}>Successfully registered!</span> :
+                loadingRegister ? "Registering..." : "Register"}
             </button>
         </div>
 

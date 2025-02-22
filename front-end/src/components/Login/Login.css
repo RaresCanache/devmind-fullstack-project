@@ -8,7 +8,7 @@
 .login-container-inner {
     display: flex;
     flex-direction: column;
-    background-color: mintcream;
+    background-color: whitesmoke;
     padding: 20px;
     border-radius: 10px;
 }
@@ -26,7 +26,6 @@ button.login-button {
     cursor: pointer;
     transition-duration: 0.3s;
     align-self: center;
-    width: 30%;
 }
 
 button.login-button:hover {

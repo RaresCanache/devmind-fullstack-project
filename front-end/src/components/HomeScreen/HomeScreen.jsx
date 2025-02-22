@@ -9,7 +9,7 @@ const HomeScreen = () => {
             <div className="blurred-background"/>
             <div className="content">
                 <div className="home-container">
-                    <h1 style={{fontSize: "60px"}}>Welcome to my app</h1>
+                    <h1 style={{fontSize: "60px"}}>Financial Calendar App</h1>
                     <div>
                         <button className="home-button" onClick={() => navigate("login")}>
                             Login
