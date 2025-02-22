@@ -18,7 +18,7 @@ public class UserDto {
     private String email;
 
     @Pattern(regexp = "^(?=.*[A-Z])(?=.*\\d)(?=.*[\\W_]).+$",
-            message = "password must have digit + lowercase + uppercase + punctuation + symbol")
+            message = "password must have digit + lowercase + uppercase + punctuation or symbol")
     private String password;
 
     @NotBlank(message = "Should not be null or blank")
