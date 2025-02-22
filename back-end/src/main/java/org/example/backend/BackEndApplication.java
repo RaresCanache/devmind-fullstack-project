@@ -22,6 +22,6 @@ public class BackEndApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        System.out.println(savingsService.computeAmountPerDayForUserIdAndBankAccountId(1, 1));
+        //System.out.println(savingsService.computeAmountPerDayForUserIdAndBankAccountId(1, 1));
     }
 }

@@ -14,7 +14,7 @@ public class UserDto {
     @NotBlank(message = "Should not be null or blank")
     private String lastName;
 
-    @Email
+    @Email(message = "Email should be valid")
     private String email;
 
     @Pattern(regexp = "^(?=.*[A-Z])(?=.*\\d)(?=.*[\\W_]).+$",
