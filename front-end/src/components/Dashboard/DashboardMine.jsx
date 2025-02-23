@@ -1,16 +1,12 @@
-import {useSelector} from "react-redux";
-import Calendar from "react-calendar";
-import {useState} from "react";
+import "./DashboardMine.css";
+import CalendarComponent from "../CalendarComponent/CalendarComponent.jsx";
 
-const Dashboard = () => {
-    const user = useSelector(state => state.user);
-    const [date, setDate] = useState(new Date())
-
+const DashboardMine = () => {
     return (
-        <div>
-            hei
+        <div className="dashboard-right-container">
+            <CalendarComponent/>
         </div>
     )
 };
 
-export default Dashboard;
+export default DashboardMine;

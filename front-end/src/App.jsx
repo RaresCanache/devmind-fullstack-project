@@ -4,7 +4,7 @@ import HomeScreen from "./components/HomeScreen/HomeScreen.jsx";
 import Login from "./components/Login/Login.jsx";
 import Header from "./components/Header/Header.jsx";
 import Register from "./components/Register/Register.jsx";
-import {Dashboard} from "@mui/icons-material";
+import DashboardMine from "./components/Dashboard/DashboardMine.jsx";
 
 function App() {
 
@@ -15,7 +15,7 @@ function App() {
                 <Route path="" element={<HomeScreen/>}/>
                 <Route path="login" element={<Login/>}/>
                 <Route path="register" element={<Register/>}/>
-                <Route path="dashboard" element={<Dashboard/>}/>
+                <Route path="dashboard" element={<DashboardMine/>}/>
             </Routes>
         </>
     );
