@@ -22,7 +22,6 @@ public class JwtService {
     public String createToken(String email, boolean isPremium) {
         SecretKey key = Keys.hmacShaKeyFor(secret.getBytes());
 
-        //TODO de extras premium din database
         return Jwts.builder()
                 .header()
                 .and()

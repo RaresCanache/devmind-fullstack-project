@@ -43,6 +43,10 @@ public class SavingsServiceImpl implements SavingsService {
 
         for (int i = 0; i < noDays; i++) {
             balance = balance.subtract(toSubtract);
+            /*
+            Used setScale to round the results half up, otherwise I would get negative values because of
+            startingBalanceDivByNoDays function being rounded up as well
+            */
             amountRequiredPerEachDay.add(balance.setScale(0, RoundingMode.HALF_UP));
         }
 

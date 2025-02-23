@@ -17,11 +17,8 @@ public class BackEndApplication implements CommandLineRunner {
 
     private final SavingsService savingsService;
 
-    private final PasswordEncoder passwordEncoder;
-
-
     @Override
     public void run(String... args) throws Exception {
-        //System.out.println(savingsService.computeAmountPerDayForUserIdAndBankAccountId(1, 1));
+        System.out.println(savingsService.computeAmountPerDayForUserIdAndBankAccountId(1, 1));
     }
 }
