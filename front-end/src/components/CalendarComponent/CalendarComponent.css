@@ -1,13 +1,12 @@
 .react-calendar {
   width: 80%;
-  height: auto;
   background: mintcream;
   font-family: 'Arial', 'Helvetica', sans-serif;
-  line-height: 4.5em;
+  line-height: 2.5em;
 }
 
 .react-calendar--doubleView {
-  width: 700px;
+  width: 600px;
 }
 
 .react-calendar--doubleView .react-calendar__viewContainer {
@@ -98,16 +97,12 @@
 
 .react-calendar__tile {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  max-width: 100%;
-  height: 100px;
-  padding: 10px;
   background: mintcream;
   text-align: center;
   font: inherit;
   font-size: 0.8em;
-  border-radius: 10px;
 }
 
 .react-calendar__tile:disabled {

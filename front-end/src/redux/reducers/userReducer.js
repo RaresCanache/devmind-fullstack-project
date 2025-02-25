@@ -9,7 +9,7 @@ const userSlice = createSlice({
     reducers: {
         setUserAndToken: (state, action) => {
             state.user = action.payload.user;
-            state.bearerToken = action.payload.bearerToken
+            state.bearerToken = action.payload.bearerToken;
         },
     }
 })

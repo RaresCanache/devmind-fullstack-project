@@ -18,7 +18,6 @@ const Register = () => {
     const [successfullRegistration, setSuccessfullRegistration] = useState(false);
     const navigate = useNavigate();
 
-    //TODO verifica ca un User s a inregistrat
     const handleChange = (event) => {
         setNewUser({
             ...newUser,

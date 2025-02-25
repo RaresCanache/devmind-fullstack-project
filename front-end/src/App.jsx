@@ -5,6 +5,7 @@ import Login from "./components/Login/Login.jsx";
 import Header from "./components/Header/Header.jsx";
 import Register from "./components/Register/Register.jsx";
 import DashboardMine from "./components/Dashboard/DashboardMine.jsx";
+import AddExpense from "./components/AddExpense/AddExpense.jsx";
 
 function App() {
 
@@ -16,9 +17,10 @@ function App() {
                 <Route path="login" element={<Login/>}/>
                 <Route path="register" element={<Register/>}/>
                 <Route path="dashboard" element={<DashboardMine/>}/>
+                <Route path="add-expense" element={<AddExpense/>}/>
             </Routes>
         </>
     );
 }
 
-export default App
+export default App;

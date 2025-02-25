@@ -1,3 +1,15 @@
+.dashboard-left-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Align content to the left */
+    align-items: center; /* Align content to the top */
+    height: calc(100vh - 50px); /* Take full height of the page */
+    width: 50%; /* Adjust width as needed (can be 100% for full width) */
+    position: absolute; /* Position relative to the viewport */
+    left: 0; /* Align to the right side */
+    top: 50px;
+}
+
 .dashboard-right-container {
     display: flex;
     justify-content: flex-start; /* Align content to the left */
@@ -7,4 +19,8 @@
     position: absolute; /* Position relative to the viewport */
     right: 0; /* Align to the right side */
     top: 50px;
+}
+
+.MuiAccordion-root {
+    width: 720px;
 }

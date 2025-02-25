@@ -13,16 +13,39 @@ const CalendarComponent = () => {
     const [savings, setSavings] = useState([]);
     const [loadingSavings, setLoadingSavings] = useState(false);
 
+    useEffect(() => {
+        handleSavings()
+    }, []);
+
+    const formatDate = (date) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+
+        return `${year}-${month}-${day}`;
+    }
+
     const handleSavings = async () => {
         setLoadingSavings(true);
 
         try {
             const response = await calculateSavings(user.id, 1, token);
             if (!response.ok) {
+                //TODO add valid bankAccountId
                 throw new Error("No bank account with id: 1");
             }
             const savingsData = await response.json();
-            setSavings(savingsData);
+
+            const savingsMap = {};
+            let currentDate = new Date(startDate);
+            //Maparea pe date a array-ului cu Integers intors din back-end
+            for (let i = 0; i < savingsData.length; i++) {
+                // functia formatDate schimba format-ul in "YYYY-MM-DD", pentru maparea in Calendar a datelor
+                const formattedDate = formatDate(currentDate);
+                savingsMap[formattedDate] = savingsData[i];
+                currentDate.setDate(currentDate.getDate() + 1);
+            }
+            setSavings(savingsMap);
         } catch (error) {
             console.log("Error calculating savings: ", error)
         } finally {
@@ -30,13 +53,21 @@ const CalendarComponent = () => {
         }
     }
 
-    useEffect(() => {
-        console.log(savings);
-    }, [savings]);
+    const handleTileContent = ({date, view}) => {
+        if (view !== "month") return null;
 
-    useEffect(() => {
-        handleSavings()
-    }, []);
+        const formattedDate = formatDate(date);
+
+        return savings[formattedDate] ? (
+            <div style={{
+                color: "darkblue",
+                fontWeight: "bold",
+                fontSize: "1.2em"
+            }}>
+                {savings[formattedDate]}
+            </div>
+        ) : 0
+    };
 
     return (
         <Calendar
@@ -46,6 +77,7 @@ const CalendarComponent = () => {
             defaultActiveStartDate={startDate}
             minDate={startDate}
             maxDate={endDate}
+            tileContent={handleTileContent}
         />
     );
 };
