@@ -1,8 +1,43 @@
 .add-expense-container {
     display: flex;
+    flex-direction: column;
     position: relative;
     justify-content: center;
     align-items: center;
     height: calc(100vh - 50px);
 }
+
+.add-expense-inner-container {
+    display: flex;
+    flex-direction: column;
+    border: 3px solid blueviolet;
+    align-items: center;
+    justify-content: center;
+    background-color: whitesmoke;
+    padding: 35px;
+    gap: 10px;
+}
+
+.add-expense-select {
+    background-color: #e8f0fe;
+    border-radius: 10px;
+    font-size: 1.5em;
+    text-align: center;
+    outline: 3px solid black;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+.add-expense-select option {
+    background-color: #e8f0fe;
+    color: black;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.add-expense-select:hover, .add-expense-select:focus {
+    outline: 3px solid blueviolet;
+    color: blueviolet;
+}
+
 

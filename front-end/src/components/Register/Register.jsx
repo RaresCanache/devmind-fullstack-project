@@ -38,7 +38,7 @@ const Register = () => {
             console.log(userResponse);
 
             setSuccessfullRegistration(true);
-            setTimeout(() => navigate("/dashboard"), 2000);
+            setTimeout(() => navigate("/dashboard"), 1000);
         } catch (error) {
             console.error("Error registering user: ", error);
         } finally {

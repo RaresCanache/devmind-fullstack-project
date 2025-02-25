@@ -11,7 +11,6 @@ const CalendarComponent = () => {
     const startDate = user?.financialPlan?.startDate ? new Date(user.financialPlan.startDate) : new Date();
     const endDate = user?.financialPlan?.endDate ? new Date(user.financialPlan.endDate) : null;
     const [savings, setSavings] = useState([]);
-    const [loadingSavings, setLoadingSavings] = useState(false);
 
     useEffect(() => {
         handleSavings()
@@ -26,8 +25,6 @@ const CalendarComponent = () => {
     }
 
     const handleSavings = async () => {
-        setLoadingSavings(true);
-
         try {
             const response = await calculateSavings(user.id, 1, token);
             if (!response.ok) {
@@ -48,8 +45,6 @@ const CalendarComponent = () => {
             setSavings(savingsMap);
         } catch (error) {
             console.log("Error calculating savings: ", error)
-        } finally {
-            setLoadingSavings(false);
         }
     }
 

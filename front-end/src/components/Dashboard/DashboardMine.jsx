@@ -29,10 +29,14 @@ const DashboardMine = () => {
         }
     };
 
+    useEffect(() => {
+        handleExpenses();
+    }, []);
+
     return (
         <div>
             <div className="dashboard-left-container">
-                <Accordion onClick={handleExpenses}>
+                <Accordion>
                     <AccordionSummary aria-controls="panel1-content" id="panel1-header" expandIcon={<ArrowDownward />}>
                         <p style={{color: "blueviolet"}}>See expenses</p>
                     </AccordionSummary>

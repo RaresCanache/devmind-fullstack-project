@@ -6,3 +6,12 @@ export const getExpensesByUserId = async (userId, bearerToken) => fetch(`${BASE_
     }
 })
 
+export const addExpense = async (newExpense, bearerToken) => fetch(`${BASE_URL}/expenses/save`, {
+    method: "POST",
+    headers: {
+        Authorization: `Bearer ${bearerToken}`,
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify(newExpense)
+})
+

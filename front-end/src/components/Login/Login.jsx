@@ -40,7 +40,7 @@ const Login = () => {
                 bearerToken: tokenData.token,
             }))
             setSuccessfullLogin(true);
-            setTimeout(() => navigate("/dashboard"), 2000);
+            setTimeout(() => navigate("/dashboard"), 1000);
         } catch (error) {
             console.error("Error authenticating user: ", error);
         } finally {
@@ -70,7 +70,7 @@ const Login = () => {
                         sx={textFieldMuiStyles}
                     />
                 </div>
-                <button className="login-button" onClick={handleClick}>
+                <button className="login-button" onClick={handleClick} disabled={loadingLogin || successfullLogin}>
                     {successfullLogin ? <span style={{color: "chartreuse"}}>Logged in</span>
                         : loadingLogin ? "Logging in..." : "Login"}
                 </button>
