@@ -3,6 +3,7 @@ package org.example.backend.savings_logic;
 import lombok.RequiredArgsConstructor;
 import org.example.backend.models.BankAccount;
 import org.example.backend.models.FinancialPlan;
+import org.example.backend.response_DTOs.BankAccountResponseDto;
 import org.example.backend.service_interface.BankAccountService;
 import org.example.backend.service_interface.ExpenseService;
 import org.example.backend.service_interface.FinancialPlanService;
@@ -58,7 +59,7 @@ public class SavingsServiceImpl implements SavingsService {
 
         FinancialPlan financialPlan = financialPlanService.getFinancialPlanById(userId);
 
-        BankAccount bankAccount = bankAccountService.getBankAccountById(bankAccountId);
+        BankAccountResponseDto bankAccount = bankAccountService.getBankAccountById(bankAccountId);
 
         LocalDate startDate = financialPlan.getStartDate();
         LocalDate endDate = financialPlan.getEndDate();

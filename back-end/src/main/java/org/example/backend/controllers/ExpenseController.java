@@ -3,7 +3,6 @@ package org.example.backend.controllers;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.backend.DTOs.ExpenseDto;
-import org.example.backend.models.Expense;
 import org.example.backend.response_DTOs.ExpenseResponseDto;
 import org.example.backend.service_interface.ExpenseService;
 import org.example.backend.updateDTOs.ExpenseUpdateDto;
@@ -24,7 +23,6 @@ public class ExpenseController {
         return ResponseEntity.ok(expenseService.getExpenseById(expenseId));
     }
 
-    //TODO modify response DTO
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<ExpenseResponseDto>> getExpensesByUserId(@PathVariable Integer userId) {
         return ResponseEntity.ok(expenseService.getAllExpensesByUserId(userId));

@@ -3,8 +3,7 @@ package org.example.backend.controllers;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.backend.DTOs.BankAccountDto;
-import org.example.backend.DTOs.ResponseBankAccountDto;
-import org.example.backend.models.BankAccount;
+import org.example.backend.response_DTOs.BankAccountResponseDto;
 import org.example.backend.service_interface.BankAccountService;
 import org.example.backend.updateDTOs.BankAccountUpdateDto;
 import org.springframework.http.HttpStatus;
@@ -20,17 +19,17 @@ public class BankAccountController {
     private final BankAccountService bankAccountService;
 
     @GetMapping("/{bankAccountId}")
-    public ResponseEntity<BankAccount> getBankAccountById(@PathVariable Integer bankAccountId) {
+    public ResponseEntity<BankAccountResponseDto> getBankAccountById(@PathVariable Integer bankAccountId) {
         return ResponseEntity.ok(bankAccountService.getBankAccountById(bankAccountId));
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<BankAccount>> getAllBankAccountsByUserId(@PathVariable Integer userId) {
+    public ResponseEntity<List<BankAccountResponseDto>> getAllBankAccountsByUserId(@PathVariable Integer userId) {
         return ResponseEntity.ok(bankAccountService.getAllBankAccountsByUserId(userId));
     }
 
     @PostMapping("/save")
-    public ResponseEntity<ResponseBankAccountDto> saveBankAccount(@Valid @RequestBody BankAccountDto bankAccountDto) {
+    public ResponseEntity<BankAccountResponseDto> saveBankAccount(@Valid @RequestBody BankAccountDto bankAccountDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(bankAccountService.createBankAccount(bankAccountDto));
     }
 
