@@ -2,10 +2,13 @@ import "./Register.css"
 import {textFieldMuiStyles} from "../TextFieldMUIStyles/TextFieldMuiStyles.js";
 import {TextField} from "@mui/material";
 import {useState} from "react";
-import {registerUser} from "../../APIs/UserAPI.js";
+import {authenticateUser, getUserByEmail, registerUser} from "../../APIs/UserAPI.js";
 import {useNavigate} from "react-router";
+import {useDispatch} from "react-redux";
+import {setUserAndToken} from "../../redux/reducers/userReducer.js";
 
 const Register = () => {
+    const dispatch = useDispatch();
     const [newUser, setNewUser] = useState({
         username: "",
         firstName: "",
@@ -14,6 +17,7 @@ const Register = () => {
         password: "",
         avatarUrl: "",
     });
+
     const [loadingRegister, setLoadingRegister] = useState(false);
     const [successfullRegistration, setSuccessfullRegistration] = useState(false);
     const navigate = useNavigate();
@@ -29,16 +33,24 @@ const Register = () => {
         setSuccessfullRegistration(false);
         setLoadingRegister(true);
         try {
-            const response = await registerUser(newUser);
+            const registerResponse = await registerUser(newUser);
 
-            if (!response.ok) {
+            if (!registerResponse.ok) {
                 throw new Error("Could not register user");
             }
-            const userResponse = await response.json();
-            console.log(userResponse);
-
             setSuccessfullRegistration(true);
-            setTimeout(() => navigate("/dashboard"), 1000);
+
+            const tokenResponse = await authenticateUser(newUser.email, newUser.password);
+            const tokenData = await tokenResponse.json();
+
+            const userResponse = await getUserByEmail(newUser.email, tokenData.token);
+            const userData = await userResponse.json();
+
+            dispatch(setUserAndToken({
+                user: userData,
+                bearerToken: tokenData.token
+            }))
+            setTimeout(() => navigate("/add-bankAccount"), 2000);
         } catch (error) {
             console.error("Error registering user: ", error);
         } finally {

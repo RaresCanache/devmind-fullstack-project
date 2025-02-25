@@ -1,5 +1,5 @@
 import {useNavigate, useSearchParams} from "react-router";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {textFieldMuiStyles} from "../TextFieldMUIStyles/TextFieldMuiStyles.js";
 import "./AddExpense.css";
 import {TextField} from "@mui/material";
@@ -52,7 +52,11 @@ const AddExpense = () => {
         <div className="add-expense-container">
             <div className="add-expense-inner-container">
                 <form>
-                    <select id="type" name="type" value={newExpense.type} onChange={handleChange} required
+                    <select id="type"
+                            name="type"
+                            value={newExpense.type}
+                            onChange={handleChange}
+                            required
                             className="add-expense-select">
                         <option value="" disabled style={{color: "gray"}}>Select a type</option>
                         <option value="GROCERIES">Groceries</option>
