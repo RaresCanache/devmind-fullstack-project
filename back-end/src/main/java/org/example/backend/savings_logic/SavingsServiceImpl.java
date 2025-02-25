@@ -38,8 +38,8 @@ public class SavingsServiceImpl implements SavingsService {
                 .reduce(BigDecimal.ZERO, (total, amount) -> total.add(amount));
     }
 
-    private List<BigDecimal> amountRequiredPerEachDay(BigDecimal balance, BigDecimal toSubtract, long noDays) {
-        List<BigDecimal> amountRequiredPerEachDay = new ArrayList<>();
+    private List<Integer> amountRequiredPerEachDay(BigDecimal balance, BigDecimal toSubtract, long noDays) {
+        List<Integer> amountRequiredPerEachDay = new ArrayList<>();
 
         for (int i = 0; i < noDays; i++) {
             balance = balance.subtract(toSubtract);
@@ -47,13 +47,13 @@ public class SavingsServiceImpl implements SavingsService {
             Used setScale to round the results half up, otherwise I would get negative values because of
             startingBalanceDivByNoDays function being rounded up as well
             */
-            amountRequiredPerEachDay.add(balance.setScale(0, RoundingMode.HALF_UP));
+            amountRequiredPerEachDay.add(balance.setScale(0, RoundingMode.HALF_UP).intValueExact());
         }
 
         return amountRequiredPerEachDay;
     }
 
-    public List<BigDecimal> computeAmountPerDayForUserIdAndBankAccountId(Integer userId, Integer bankAccountId) {
+    public List<Integer> computeAmountPerDayForUserIdAndBankAccountId(Integer userId, Integer bankAccountId) {
         userService.userExistsById(userId);
 
         FinancialPlan financialPlan = financialPlanService.getFinancialPlanById(userId);
@@ -64,7 +64,6 @@ public class SavingsServiceImpl implements SavingsService {
         LocalDate endDate = financialPlan.getEndDate();
 
         long noDays = noDaysFinancialPlan(startDate, endDate);
-
         /*
         Here we compute the starting balance that remains by subtracting the total amount of all expenses
         that occur in the period set for the financial plan and subtracting the amount to be saved as well
@@ -74,16 +73,6 @@ public class SavingsServiceImpl implements SavingsService {
 
         //Used rounding half up in case the division quotient has an infinite number of decimals
         BigDecimal startingBalanceDivByNoDays = startingBalance.divide(BigDecimal.valueOf(noDays), RoundingMode.HALF_UP);
-
         return amountRequiredPerEachDay(startingBalance, startingBalanceDivByNoDays, noDays);
     }
-
-
-
-
-
-
-
-
-
 }

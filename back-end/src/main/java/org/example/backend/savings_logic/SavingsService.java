@@ -7,5 +7,5 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface SavingsService {
-    public List<BigDecimal> computeAmountPerDayForUserIdAndBankAccountId(Integer userId, Integer bankAccountId);
+    public List<Integer> computeAmountPerDayForUserIdAndBankAccountId(Integer userId, Integer bankAccountId);
 }

@@ -25,7 +25,7 @@ public class ExpenseController {
 
     //TODO modify response DTO
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Expense>> getExpenseByUserId(@PathVariable Integer userId) {
+    public ResponseEntity<List<Expense>> getExpensesByUserId(@PathVariable Integer userId) {
         return ResponseEntity.ok(expenseService.getAllExpensesByUserId(userId));
     }
 

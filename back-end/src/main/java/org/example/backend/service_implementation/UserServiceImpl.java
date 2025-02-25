@@ -6,6 +6,7 @@ import org.example.backend.exception_handlers.UserNotFoundException;
 import org.example.backend.mappers.UserMapper;
 import org.example.backend.models.User;
 import org.example.backend.repositories.UserRepository;
+import org.example.backend.response_DTOs.UserResponseDto;
 import org.example.backend.security.loginDto.TokenResponseDto;
 import org.example.backend.security.security_services.JwtService;
 import org.example.backend.service_interface.UserService;
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,30 +27,38 @@ public class UserServiceImpl implements UserService {
     private final JwtService jwtService;
 
     @Override
-    public User createUser(UserDto userDto) {
+    public UserResponseDto createUser(UserDto userDto) {
         User user = userMapper.toModel(userDto);
-
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        return userRepository.save(user);
+        userRepository.save(user);
+
+        return userMapper.toDto(user);
     }
 
     @Override
-    public User getUserById(Integer userId) {
-        return userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User with id: " + userId + " not found"));
+    public UserResponseDto getUserById(Integer userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User with id: " + userId + " not found"));
+
+        return userMapper.toDto(user);
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public UserResponseDto getUserByEmail(String email) {
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException("User with email: " + email + " not found"));
+
+        return userMapper.toDto(user);
     }
 
     @Override
-    public User getUserByEmail(String email) {
-        return userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException("User with email: " + email + " not found"));
+    public List<UserResponseDto> getAllUsers() {
+        return userRepository
+                .findAll()
+                .stream().map(userMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     public TokenResponseDto authenticate(String email, String password) {
-        User user = getUserByEmail(email);
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException("User with email: " + email + " not found"));
 
         if (!passwordEncoder.matches(password, user.getPassword())) {
             throw new BadCredentialsException("Invalid email or password");

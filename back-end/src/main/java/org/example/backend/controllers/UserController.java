@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.backend.DTOs.UserDto;
 import org.example.backend.models.User;
+import org.example.backend.response_DTOs.UserResponseDto;
 import org.example.backend.security.loginDto.TokenResponseDto;
 import org.example.backend.security.loginDto.UserLoginDto;
 import org.example.backend.service_interface.UserService;
@@ -26,22 +27,22 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> registerUser(@Valid @RequestBody UserDto userDto) {
+    public ResponseEntity<UserResponseDto> registerUser(@Valid @RequestBody UserDto userDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(userDto));
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<User> getUserById(@PathVariable Integer userId) {
+    public ResponseEntity<UserResponseDto> getUserById(@PathVariable Integer userId) {
         return ResponseEntity.ok(userService.getUserById(userId));
     }
 
     @GetMapping("/email/{email}")
-    public ResponseEntity<User> getUserByEmail(@PathVariable String email) {
+    public ResponseEntity<UserResponseDto> getUserByEmail(@PathVariable String email) {
         return ResponseEntity.ok(userService.getUserByEmail(email));
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<User>> getAllUsers() {
+    public ResponseEntity<List<UserResponseDto>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 

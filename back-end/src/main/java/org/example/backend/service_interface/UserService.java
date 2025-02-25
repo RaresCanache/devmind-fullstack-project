@@ -1,21 +1,20 @@
 package org.example.backend.service_interface;
 
 import org.example.backend.DTOs.UserDto;
-import org.example.backend.models.User;
+import org.example.backend.response_DTOs.UserResponseDto;
 import org.example.backend.security.loginDto.TokenResponseDto;
 import org.example.backend.updateDTOs.UserUpdateDto;
-import org.mapstruct.control.MappingControl;
 
 import java.util.List;
 
 public interface UserService {
-    User createUser(UserDto userDto);
+    UserResponseDto createUser(UserDto userDto);
 
-    User getUserById(Integer userId);
+    UserResponseDto getUserById(Integer userId);
 
-    User getUserByEmail(String email);
+    UserResponseDto getUserByEmail(String email);
 
-    List<User> getAllUsers();
+    List<UserResponseDto> getAllUsers();
 
     TokenResponseDto authenticate(String email, String password);
 
