@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.backend.DTOs.ExpenseDto;
 import org.example.backend.models.Expense;
+import org.example.backend.response_DTOs.ExpenseResponseDto;
 import org.example.backend.service_interface.ExpenseService;
 import org.example.backend.updateDTOs.ExpenseUpdateDto;
 import org.springframework.http.HttpStatus;
@@ -19,18 +20,18 @@ public class ExpenseController {
     private final ExpenseService expenseService;
 
     @GetMapping("/{expenseId}")
-    public ResponseEntity<Expense> getExpenseById(@PathVariable Integer expenseId) {
+    public ResponseEntity<ExpenseResponseDto> getExpenseById(@PathVariable Integer expenseId) {
         return ResponseEntity.ok(expenseService.getExpenseById(expenseId));
     }
 
     //TODO modify response DTO
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Expense>> getExpensesByUserId(@PathVariable Integer userId) {
+    public ResponseEntity<List<ExpenseResponseDto>> getExpensesByUserId(@PathVariable Integer userId) {
         return ResponseEntity.ok(expenseService.getAllExpensesByUserId(userId));
     }
 
     @PostMapping("/save")
-    public ResponseEntity<Expense> saveExpense(@Valid @RequestBody ExpenseDto expenseDto) {
+    public ResponseEntity<ExpenseResponseDto> saveExpense(@Valid @RequestBody ExpenseDto expenseDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(expenseService.createExpense(expenseDto));
     }
 

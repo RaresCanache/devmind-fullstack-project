@@ -11,13 +11,14 @@ import org.example.backend.models.Expense;
 import org.example.backend.models.User;
 import org.example.backend.repositories.ExpenseRepository;
 import org.example.backend.repositories.UserRepository;
+import org.example.backend.response_DTOs.ExpenseResponseDto;
 import org.example.backend.service_interface.ExpenseService;
-import org.example.backend.service_interface.UserService;
 import org.example.backend.updateDTOs.ExpenseUpdateDto;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -28,26 +29,31 @@ public class ExpenseServiceImpl implements ExpenseService {
     private final UserRepository userRepository;
 
     @Override
-    public Expense getExpenseById(Integer expenseId) {
-        return expenseRepository.findById(expenseId).orElseThrow(() -> new ExpenseNotFoundException("Expense with id: " + expenseId + " not found"));
+    public ExpenseResponseDto getExpenseById(Integer expenseId) {
+        Expense expense = expenseRepository.findById(expenseId).orElseThrow(() -> new ExpenseNotFoundException("Expense with id: " + expenseId + " not found"));
+
+        return expenseMapper.toDto(expense);
     }
 
     @Override
-    public List<Expense> getAllExpensesByUserId(Integer userId) {
-        if (!userRepository.existsById(userId)) {
-            throw new UserNotFoundException("User with id: " + userId + " not found");
-        }
-        return expenseRepository.findAllByUser_Id(userId);
-    }
-
-    @Override
-    public Expense createExpense(ExpenseDto expenseDto) {
+    public ExpenseResponseDto createExpense(ExpenseDto expenseDto) {
         Expense expense = expenseMapper.toModel(expenseDto);
         User user = userRepository.findById(expenseDto.getUserId())
                 .orElseThrow(() -> new UserNotFoundException("User with id: " + expenseDto.getUserId() + " not found"));
         expense.setUser(user);
+        expenseRepository.save(expense);
 
-        return expenseRepository.save(expense);
+        return expenseMapper.toDto(expense);
+    }
+
+    @Override
+    public List<ExpenseResponseDto> getAllExpensesByUserId(Integer userId) {
+        if (!userRepository.existsById(userId)) {
+            throw new UserNotFoundException("User with id: " + userId + " not found");
+        }
+        return expenseRepository.findAllByUser_Id(userId)
+                .stream().map(expenseMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     @Override

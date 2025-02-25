@@ -1,18 +1,18 @@
 package org.example.backend.service_interface;
 
 import org.example.backend.DTOs.ExpenseDto;
-import org.example.backend.models.Expense;
+import org.example.backend.response_DTOs.ExpenseResponseDto;
 import org.example.backend.updateDTOs.ExpenseUpdateDto;
 
 import java.util.List;
 
 public interface ExpenseService {
 
-    List<Expense> getAllExpensesByUserId(Integer userId);
+    ExpenseResponseDto getExpenseById(Integer expenseId);
 
-    Expense getExpenseById(Integer expenseId);
+    ExpenseResponseDto createExpense(ExpenseDto expenseDto);
 
-    Expense createExpense(ExpenseDto expenseDto);
+    List<ExpenseResponseDto> getAllExpensesByUserId(Integer userId);
 
     void updateExpenseById(Integer expenseId, ExpenseUpdateDto expenseDto);
 

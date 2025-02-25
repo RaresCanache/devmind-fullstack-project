@@ -2,9 +2,9 @@ package org.example.backend.mappers;
 
 import org.example.backend.DTOs.ExpenseDto;
 import org.example.backend.models.Expense;
+import org.example.backend.response_DTOs.ExpenseResponseDto;
 import org.example.backend.updateDTOs.ExpenseUpdateDto;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
@@ -12,7 +12,7 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 public interface ExpenseMapper {
     Expense toModel(ExpenseDto expenseDto);
 
-    ExpenseDto toDto(Expense expense);
+    ExpenseResponseDto toDto(Expense expense);
 
     void updateExpenseFromDto(ExpenseUpdateDto expenseUpdateDto, @MappingTarget Expense expense);
 
