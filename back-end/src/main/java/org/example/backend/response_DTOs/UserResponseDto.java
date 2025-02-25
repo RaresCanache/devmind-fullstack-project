@@ -13,7 +13,6 @@ public class UserResponseDto {
     private String fullName;
     private String avatarUrl;
     private FinancialPlan financialPlan;
-    private List<BankAccountResponseDto> bankAccounts;
     private boolean premium;
 
 }
