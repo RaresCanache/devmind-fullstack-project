@@ -7,8 +7,8 @@ import {useSelector} from "react-redux";
 import {addExpense} from "../../APIs/ExpensesAPI.js";
 
 const AddExpense = () => {
-    const [searchParams, setSearchParams] = useSearchParams();
-    const financialPlan = useSelector(state => state.user.user.financialPlan);
+    const [searchParams] = useSearchParams();
+    const financialPlan = useSelector(state => state.user.financialPlan);
     const bearerToken = useSelector(state => state.user.bearerToken);
     const [loadingExpense, setLoadingExpense] = useState(false);
     const [successfullAdd, setSuccessfullAdd] = useState(false);
@@ -40,7 +40,7 @@ const AddExpense = () => {
                 throw new Error("Expense can't be added");
             }
             setSuccessfullAdd(true);
-            setTimeout(() => navigate("/dashboard"), 1000);
+            setTimeout(() => navigate("/dashboard"), 2000);
         } catch (error) {
             console.log("Expense can't be added", error);
         } finally {
@@ -87,8 +87,8 @@ const AddExpense = () => {
                     required
                     slotProps={{inputLabel: {shrink: true}}}
                     inputProps={{
-                        min: financialPlan.startDate,
-                        max: financialPlan.endDate,
+                        min: financialPlan.startDate || "",
+                        max: financialPlan.endDate || "",
                     }}
                 />
                 <TextField

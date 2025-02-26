@@ -1,9 +1,10 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useNavigate, useSearchParams} from "react-router";
 import {TextField} from "@mui/material";
 import {textFieldMuiStyles} from "../TextFieldMUIStyles/TextFieldMuiStyles.js";
 import {createFinancialPlan} from "../../APIs/financialPlan.js";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {setFinancialPlan} from "../../redux/reducers/userReducer.js";
 
 const CreateFinancialPlan = () => {
     const [searchParams] = useSearchParams();
@@ -11,6 +12,7 @@ const CreateFinancialPlan = () => {
     const [successfullFinancialPlan, setSuccessfullFinancialPlan] = useState(false);
     const bearerToken = useSelector(state => state.user.bearerToken);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [newFinancialPlan, setNewFinancialPlan] = useState({
         userId: searchParams.get("userId"),
         type: "",
@@ -34,8 +36,12 @@ const CreateFinancialPlan = () => {
             if (!response.ok) {
                 throw new Error("Financial plan can't be created");
             }
+            const financialPlanData = await response.json();
+            dispatch(setFinancialPlan({
+                financialPlan: financialPlanData
+            }))
             setSuccessfullFinancialPlan(true);
-            setTimeout(() => navigate("/login"), 1000);
+            setTimeout(() => navigate(`/add-expense?userId=${newFinancialPlan.userId}`), 1000);
         } catch (error) {
             console.log("Financial plan can't be created", error);
         } finally {
@@ -76,7 +82,7 @@ const CreateFinancialPlan = () => {
                     type="date"
                     name="startDate"
                     margin="normal"
-                    value={newFinancialPlan.dateExpense || ""}
+                    value={newFinancialPlan.startDate}
                     onChange={handleChange}
                     sx={{...textFieldMuiStyles, width: "100%"}}
                     required
@@ -87,7 +93,7 @@ const CreateFinancialPlan = () => {
                     type="date"
                     name="endDate"
                     margin="normal"
-                    value={newFinancialPlan.dateExpense || ""}
+                    value={newFinancialPlan.endDate}
                     onChange={handleChange}
                     sx={{...textFieldMuiStyles, width: "100%"}}
                     required

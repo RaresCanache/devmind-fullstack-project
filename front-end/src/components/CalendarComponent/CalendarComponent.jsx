@@ -6,15 +6,17 @@ import {calculateSavings} from "../../APIs/SavingsAPI.js";
 
 const CalendarComponent = () => {
     const [date, setDate] = useState(new Date());
+    const bankAccount = useSelector(state => state.bankAccounts.bankAccounts);
+    const financialPlan = useSelector(state => state.user.financialPlan)
     const user = useSelector(state => state.user.user);
     const token = useSelector(state => state.user.bearerToken);
-    const startDate = user?.financialPlan?.startDate ? new Date(user.financialPlan.startDate) : new Date();
-    const endDate = user?.financialPlan?.endDate ? new Date(user.financialPlan.endDate) : null;
+    const startDate = financialPlan?.startDate ? new Date(financialPlan.startDate) : new Date();
+    const endDate = financialPlan?.endDate ? new Date(financialPlan.endDate) : null;
     const [savings, setSavings] = useState([]);
 
     useEffect(() => {
-        handleSavings()
-    }, []);
+            handleSavings();
+    }, [bankAccount]);
 
     const formatDate = (date) => {
         const year = date.getFullYear();
@@ -26,10 +28,9 @@ const CalendarComponent = () => {
 
     const handleSavings = async () => {
         try {
-            const response = await calculateSavings(user.id, 1, token);
+            const response = await calculateSavings(user.id, bankAccount[0].id, token);
             if (!response.ok) {
-                //TODO add valid bankAccountId
-                throw new Error("No bank account with id: 1");
+                throw new Error(`No bank account with id: ${bankAccount[0].id}`);
             }
             const savingsData = await response.json();
 

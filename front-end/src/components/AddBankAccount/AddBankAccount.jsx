@@ -19,9 +19,6 @@ const AddBankAccount = () => {
         balance: "",
     })
 
-    useEffect(() => {
-        console.log(newBankAccount)
-    }, [newBankAccount]);
     const handleChange = (event) => {
         setNewBankAccount({
             ...newBankAccount,
@@ -39,7 +36,7 @@ const AddBankAccount = () => {
                 throw new Error("Bank account can't be added");
             }
             setSuccessfullBankAccount(true);
-            setTimeout(() => navigate("/dashboard"), 1000);
+            setTimeout(() => navigate(`/create-financial-plan?userId=${newBankAccount.userId}`), 1000);
         } catch (error) {
             console.log("Bank account can't be added", error);
         } finally {

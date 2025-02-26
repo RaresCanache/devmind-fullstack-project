@@ -2,7 +2,7 @@ import {useDispatch} from "react-redux";
 import "./Login.css";
 import {TextField} from "@mui/material";
 import {useState} from "react";
-import {setUserAndToken} from "../../redux/reducers/userReducer.js";
+import {setFinancialPlan, setUserAndToken} from "../../redux/reducers/userReducer.js";
 import {authenticateUser, getUserByEmail} from "../../APIs/UserAPI.js";
 import {textFieldMuiStyles} from "../TextFieldMUIStyles/TextFieldMuiStyles.js";
 import {useNavigate} from "react-router";
@@ -38,6 +38,9 @@ const Login = () => {
             dispatch(setUserAndToken({
                 user: userData,
                 bearerToken: tokenData.token,
+            }))
+            dispatch(setFinancialPlan({
+                financialPlan: userData.financialPlan
             }))
             setSuccessfullLogin(true);
             setTimeout(() => navigate("/dashboard"), 1000);

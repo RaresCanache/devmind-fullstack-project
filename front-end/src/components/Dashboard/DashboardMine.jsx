@@ -10,18 +10,17 @@ import {setExpenses} from "../../redux/reducers/expensesReducer.js";
 import BankAccountsGrid from "../BankAccountsGrid/BankAccountsGrid.jsx";
 import {getBankAccountsByUserId} from "../../APIs/BankAccountAPI.js";
 import {setBankAccounts} from "../../redux/reducers/bankAccountsReducer.js";
-import FinancialPlanGrid from "../FinancialPlanGrid/FinancialPlanGrid.jsx";
 
 const DashboardMine = () => {
-    const userId = useSelector(state => state.user.user.id);
+    const user = useSelector(state => state.user.user);
     const bearerToken = useSelector(state => state.user.bearerToken);
     const dispatch = useDispatch();
 
     const handleExpenses = async () => {
         try {
-            const response = await getExpensesByUserId(userId, bearerToken);
+            const response = await getExpensesByUserId(user.id, bearerToken);
             if (!response.ok) {
-                throw new Error(`No expenses assigned to user id: ${userId}`);
+                throw new Error(`No expenses assigned to user id: ${user.id}`);
             }
             const expensesData = await response.json();
 
@@ -35,10 +34,10 @@ const DashboardMine = () => {
 
     const handleBankAccounts = async () => {
         try {
-            const response = await getBankAccountsByUserId(userId, bearerToken);
+            const response = await getBankAccountsByUserId(user.id, bearerToken);
 
             if (!response.ok) {
-                throw new Error(`No bank accounts assigned to user id: ${userId}`);
+                throw new Error(`No bank accounts assigned to user id: ${user.id}`);
             }
             const bankAccountsData = await response.json();
             dispatch(setBankAccounts({
@@ -51,7 +50,7 @@ const DashboardMine = () => {
 
     useEffect(() => {
         handleExpenses();
-        handleBankAccounts();
+        handleBankAccounts()
     }, []);
 
     return (

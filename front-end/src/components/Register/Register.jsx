@@ -50,7 +50,7 @@ const Register = () => {
                 user: userData,
                 bearerToken: tokenData.token
             }))
-            setTimeout(() => navigate("/add-bankAccount"), 2000);
+            setTimeout(() => navigate(`/add-bank-account?userId=${userData.id}`), 2000);
         } catch (error) {
             console.error("Error registering user: ", error);
         } finally {
