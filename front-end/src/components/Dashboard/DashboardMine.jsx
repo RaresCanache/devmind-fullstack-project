@@ -10,6 +10,7 @@ import {setExpenses} from "../../redux/reducers/expensesReducer.js";
 import BankAccountsGrid from "../BankAccountsGrid/BankAccountsGrid.jsx";
 import {getBankAccountsByUserId} from "../../APIs/BankAccountAPI.js";
 import {setBankAccounts} from "../../redux/reducers/bankAccountsReducer.js";
+import FinancialPlanGrid from "../FinancialPlanGrid/FinancialPlanGrid.jsx";
 
 const DashboardMine = () => {
     const userId = useSelector(state => state.user.user.id);
@@ -57,7 +58,7 @@ const DashboardMine = () => {
         <div>
             <div className="dashboard-left-container">
                 <Accordion>
-                    <AccordionSummary aria-controls="panel1-content" id="panel1-header" expandIcon={<ArrowDownward />}>
+                    <AccordionSummary aria-controls="panel2-content" id="panel2-header" expandIcon={<ArrowDownward />}>
                         <p style={{color: "blueviolet"}}>See expenses</p>
                     </AccordionSummary>
                     <AccordionDetails>
@@ -65,7 +66,7 @@ const DashboardMine = () => {
                     </AccordionDetails>
                 </Accordion>
                 <Accordion>
-                    <AccordionSummary aria-controls="panel1-content" id="panel1-header" expandIcon={<ArrowDownward />}>
+                    <AccordionSummary aria-controls="panel3-content" id="panel3-header" expandIcon={<ArrowDownward />}>
                         <p style={{color: "blueviolet"}}>See bank accounts</p>
                     </AccordionSummary>
                     <AccordionDetails>
@@ -73,7 +74,7 @@ const DashboardMine = () => {
                     </AccordionDetails>
                 </Accordion>
                 <Accordion disabled>
-                    <AccordionSummary aria-controls="panel2-content" id="panel2-header" expandIcon={<ArrowDownward />}>
+                    <AccordionSummary aria-controls="panel4-content" id="panel4-header" expandIcon={<ArrowDownward />}>
                         <p style={{
                             color: "white",
                         }}>See transactions</p>

@@ -7,6 +7,7 @@ import Register from "./components/Register/Register.jsx";
 import DashboardMine from "./components/Dashboard/DashboardMine.jsx";
 import AddExpense from "./components/AddExpense/AddExpense.jsx";
 import AddBankAccount from "./components/AddBankAccount/AddBankAccount.jsx";
+import CreateFinancialPlan from "./components/CreateFinancialPlan/CreateFinancialPlan.jsx";
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
                 <Route path="dashboard" element={<DashboardMine/>}/>
                 <Route path="add-expense" element={<AddExpense/>}/>
                 <Route path="add-bank-account" element={<AddBankAccount/>}/>
+                <Route path="create-financial-plan" element={<CreateFinancialPlan/>}/>
             </Routes>
         </>
     );
