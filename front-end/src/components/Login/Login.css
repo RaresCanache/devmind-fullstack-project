@@ -11,6 +11,14 @@
     background-color: whitesmoke;
     padding: 20px;
     border-radius: 10px;
+    outline: 3px solid blueviolet;
+}
+
+.login-image {
+    width: 300px; /* Adjust size as needed */
+    height: auto;
+    margin-bottom: 30px;
+    align-self: center;
 }
 
 button.login-button {
@@ -26,6 +34,7 @@ button.login-button {
     cursor: pointer;
     transition-duration: 0.3s;
     align-self: center;
+    width: 150px;
 }
 
 button.login-button:hover {

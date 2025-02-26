@@ -1,15 +1,9 @@
 import {NavLink} from "react-router";
 import "./Header.css"
 import {useSelector} from "react-redux";
-import {Drawer} from "@mui/material";
-import {useState} from "react";
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const Header = () => {
     const user = useSelector(state => state.user.user);
-    const [openDrawer, setOpenDrawer] = useState(false);
-
-    const toggleDrawer = (toggled) => setOpenDrawer(toggled);
 
     return (
         <div className="nav-bar">

@@ -8,6 +8,7 @@ import DashboardMine from "./components/Dashboard/DashboardMine.jsx";
 import AddExpense from "./components/AddExpense/AddExpense.jsx";
 import AddBankAccount from "./components/AddBankAccount/AddBankAccount.jsx";
 import CreateFinancialPlan from "./components/CreateFinancialPlan/CreateFinancialPlan.jsx";
+import Footer from "./components/Footer/Footer.jsx";
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
                 <Route path="add-bank-account" element={<AddBankAccount/>}/>
                 <Route path="create-financial-plan" element={<CreateFinancialPlan/>}/>
             </Routes>
+            <Footer/>
         </>
     );
 }
