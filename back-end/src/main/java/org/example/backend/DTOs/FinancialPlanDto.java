@@ -7,7 +7,6 @@ import jakarta.validation.constraints.Positive;
 import lombok.Data;
 import org.example.backend.models.FinancialPlan;
 
-import java.beans.BeanInfo;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 

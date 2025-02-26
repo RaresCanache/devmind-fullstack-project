@@ -7,7 +7,7 @@ import org.example.backend.updateDTOs.FinancialPlanUpdateDto;
 import java.util.List;
 
 public interface FinancialPlanService {
-    FinancialPlan getFinancialPlanById(Integer financialPlanId);
+    FinancialPlan getFinancialPlanByUserId(Integer financialPlanId);
 
     FinancialPlan createFinancialPlan(FinancialPlanDto financialPlanDto);
 

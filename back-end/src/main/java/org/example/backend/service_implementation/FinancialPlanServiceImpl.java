@@ -34,9 +34,9 @@ public class FinancialPlanServiceImpl implements FinancialPlanService {
     }
 
     @Override
-    public FinancialPlan getFinancialPlanById(Integer financialPlanId) {
-        return financialPlanRepository.findById(financialPlanId)
-                .orElseThrow(() -> new FinancialPlanNotFoundException("Financial plan with id: " + financialPlanId + " not found"));
+    public FinancialPlan getFinancialPlanByUserId(Integer userId) {
+        return financialPlanRepository.findByUser_Id(userId)
+                .orElseThrow(() -> new FinancialPlanNotFoundException("Financial plan for user with id: " + userId + " not found"));
     }
 
     @Override

@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.*;
 public class FinancialPlanController {
     private final FinancialPlanService financialPlanService;
 
-    @GetMapping("/{financialPlanId}")
-    public ResponseEntity<FinancialPlan> getFinancialPlanById(@PathVariable Integer financialPlanId) {
-        return ResponseEntity.ok(financialPlanService.getFinancialPlanById(financialPlanId));
+    @GetMapping("/{userId}")
+    public ResponseEntity<FinancialPlan> getFinancialPlanById(@PathVariable Integer userId) {
+        return ResponseEntity.ok(financialPlanService.getFinancialPlanByUserId(userId));
     }
 
     @PostMapping("/save")

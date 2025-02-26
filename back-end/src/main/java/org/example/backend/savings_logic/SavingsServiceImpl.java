@@ -57,7 +57,7 @@ public class SavingsServiceImpl implements SavingsService {
     public List<Integer> computeAmountPerDayForUserIdAndBankAccountId(Integer userId, Integer bankAccountId) {
         userService.userExistsById(userId);
 
-        FinancialPlan financialPlan = financialPlanService.getFinancialPlanById(userId);
+        FinancialPlan financialPlan = financialPlanService.getFinancialPlanByUserId(userId);
 
         BankAccountResponseDto bankAccount = bankAccountService.getBankAccountById(bankAccountId);
 
