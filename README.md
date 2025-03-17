@@ -5,6 +5,7 @@ This application aims to improve financial management by helping users track and
 
 ## Overview
 This backend API provides user management, expense tracking, bank account handling, financial planning, and transactions management (WIP). It includes specific CRUD endpoints for records related to users, expenses, bank accounts, financial plans, and transactions.
+Additionaly, the user controller also handles Spring Security specific endpoints: /login and /register, which generate and validate a unique Bearer Token.
 
 ## Endpoints
 
