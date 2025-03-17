@@ -76,3 +76,20 @@ Additionaly, the user controller also handles Spring Security specific endpoints
 | DELETE | `/delete-all/{bankAccountId}` | Deletes all transactions for a bank account |
 
 ---
+
+# Global Exception Handler
+
+## Overview
+The `GlobalExceptionHandler` is a centralized error-handling mechanism for the backend API. It ensures consistent and meaningful error responses across the application, improving robustness and maintainability.
+
+### 1. **Not Found Exceptions (404 NOT FOUND)**
+These exceptions occur when a requested resource does not exist.
+- `ExpenseNotFoundException`
+- `UserNotFoundException`
+- `BankAccountNotFoundException`
+- `TransactionNotFoundException`
+- `FinancialPlanNotFoundException`
+
+## Usage
+The `@RestControllerAdvice` annotation ensures this handler is applied globally to all controllers, automatically managing exceptions thrown in the application.
+
