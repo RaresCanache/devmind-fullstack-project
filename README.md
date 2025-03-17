@@ -109,4 +109,4 @@ The **SavingsServiceImpl** is responsible for computing the **daily required sav
    - Computed the starting balance after subtracting total expenses and planned savings, then divided the remaining balance evenly over the financial plan duration. Moreover, I used **RoundingMode.HALF_UP** to prevent inaccuracies and negative values.
 
 4. **Generate Daily Savings Requirements**  
-   - I iterate through the resulted array, subtracting the daily amount for each day of the planned period. These amounts will be rendered in the **Front-End**, on each tile of the calendar.
+   - Iterated through the resulted array, subtracting the daily amount computed for the planned period. These amounts will be rendered in the **Front-End**, on each tile of the calendar.
