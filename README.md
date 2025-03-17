@@ -90,5 +90,23 @@ As mentioned previously, Spring Security helps with implementing the **JWT (JSON
 
 JWT authentication works by issuing a signed token upon successful user login. This token is included in subsequent requests, allowing the server to validate user identity without maintaining session state. A security filter intercepts requests, extracts, and verifies the token before granting access. Password encryption is also implemented to enhance security.
 
+---
 
+# Savings Logic
 
+## Overview
+The **SavingsServiceImpl** is responsible for computing the **daily required savings balance** based on a user's financial plan, expenses, and bank account balance. It ensures that the user stays on track with their financial goals by calculating a structured savings plan.
+
+## Key Functionalities
+
+1. **Calculate the Financial Plan Duration**  
+   - Used `ChronoUnit.DAYS` to determine the total number of days in a financial plan, even if it spans multiple years.
+
+2. **Compute Total Expenses**  
+   - Utilized a **reduce function** to sum up the total amount of a user's expenses.
+
+3. **Determine Daily Balance Adjustments**  
+   - Computed the starting balance after subtracting total expenses and planned savings, then divided the remaining balance evenly over the financial plan duration. Moreover, I used **RoundingMode.HALF_UP** to prevent inaccuracies and negative values.
+
+4. **Generate Daily Savings Requirements**  
+   - I iterate through the resulted array, subtracting the daily amount for each day of the planned period. These amounts will be rendered in the **Front-End**, on each tile of the calendar.
