@@ -113,5 +113,7 @@ The **SavingsServiceImpl** is responsible for computing the **daily required sav
   
 ---
 
-# Internal database diagram  --> ![image](https://github.com/user-attachments/assets/2dab8642-6a55-4354-9b17-fdaca1da278a)
+# Internal database diagram
+
+![image](https://github.com/user-attachments/assets/2dab8642-6a55-4354-9b17-fdaca1da278a)
 
