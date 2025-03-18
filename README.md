@@ -144,7 +144,7 @@ Spring Security helps with implementing the **JWT (JSON Web Token) authenticatio
 # Savings Logic
 
 ## Overview
-The **SavingsServiceImpl** is responsible for computing the **daily required savings balance** based on a user's financial plan, expenses, and bank account balance. It ensures that the user stays on track with their financial goals by calculating a structured savings plan.
+The [**SavingsServiceImpl**](back-end/src/main/java/org/example/backend/savings_logic/SavingsServiceImpl.java) is responsible for computing the **daily required savings balance** based on a user's financial plan, expenses, and bank account balance. It ensures that the user stays on track with their financial goals by calculating a structured savings plan.
 
 ## How It Works
 
