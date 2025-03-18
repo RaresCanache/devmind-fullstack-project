@@ -18,6 +18,12 @@ As mentioned previously, Spring Security helps with implementing the **JWT (JSON
 
 JWT authentication works by issuing a signed token upon successful user login. This token is included in subsequent requests, allowing the server to validate user identity without maintaining session state. A security filter intercepts requests, extracts, and verifies the token before granting access. Password encryption is also implemented to enhance security.
 
+## Internal database diagram
+
+![image](https://github.com/user-attachments/assets/2dab8642-6a55-4354-9b17-fdaca1da278a)
+
+---
+
 ## Endpoints
 
 ### User Controller
@@ -106,10 +112,3 @@ The **SavingsServiceImpl** is responsible for computing the **daily required sav
 
 4. **Generate Daily Savings Requirements**  
    - Iterated through the resulted array, subtracting the daily amount computed for the planned period. These amounts will be rendered in the **Front-End**, on each tile of the calendar.
-  
----
-
-# Internal database diagram
-
-![image](https://github.com/user-attachments/assets/2dab8642-6a55-4354-9b17-fdaca1da278a)
-
