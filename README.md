@@ -110,3 +110,7 @@ The **SavingsServiceImpl** is responsible for computing the **daily required sav
 
 4. **Generate Daily Savings Requirements**  
    - Iterated through the resulted array, subtracting the daily amount computed for the planned period. These amounts will be rendered in the **Front-End**, on each tile of the calendar.
+  
+---
+
+
