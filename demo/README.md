@@ -28,3 +28,16 @@ Amount to be saved: 1000 RON
 
 ![image](https://github.com/user-attachments/assets/3992174e-2767-4c18-8ce7-785d08284d0e)
 
+---
+
+## Add expense/expenses
+
+![image](https://github.com/user-attachments/assets/7790a532-d9c6-40a5-aa16-b9f4ac6623d1)
+
+---
+
+## Dashboard page
+
+According to the implemented savings logic, the daily spending limit is shown for each day of the calendar for the selected period
+
+![image](https://github.com/user-attachments/assets/807f4404-afc7-4676-b7c9-bc799c739c41)
