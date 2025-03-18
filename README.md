@@ -55,7 +55,7 @@ According to the implemented savings logic, the daily spending limit is shown fo
 This backend API provides user management, expense tracking, bank account handling, financial planning, and transactions management (WIP). It includes specific CRUD endpoints for records related to users, expenses, bank accounts, financial plans, and transactions.
 Additionaly, the user controller also handles Spring Security specific endpoints: `/login` and `/register`, which generate and validate a unique Bearer Token.
 
-As mentioned previously, Spring Security helps with implementing the **JWT (JSON Web Token) authentication** approach, ensuring that only authenticated and authorized users can access protected resources. It is structured into several components, including configurations for JWT setup, request filtering, and authentication services.
+Spring Security helps with implementing the **JWT (JSON Web Token) authentication** approach, ensuring that only authenticated and authorized users can access protected resources. It is structured into several components, including configurations for JWT setup, request filtering, and authentication services.
 
 ---
 
