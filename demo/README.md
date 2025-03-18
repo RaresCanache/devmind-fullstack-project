@@ -17,3 +17,14 @@
 The account balance is the monthly income of a user
 
 ![image](https://github.com/user-attachments/assets/9281865f-64b3-4c90-9983-fd0be1828f16)
+
+---
+
+## Add financial plan
+
+Starting date: 01-04-2025
+End date: 30-04-2025
+Amount to be saved: 1000 RON
+
+![image](https://github.com/user-attachments/assets/3992174e-2767-4c18-8ce7-785d08284d0e)
+
