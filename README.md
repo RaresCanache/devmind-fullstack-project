@@ -1,4 +1,4 @@
-# devmind-fullstack-project ~~ Financial Calendar app ~~
+# Financial Calendar app
 This application aims to improve financial management by helping users track and optimize their savings over time. The app calculates a personalized daily spending limit based on the user’s monthly income, estimated expenses, and savings goals, enabling better budget control and a structured financial plan.
 
 # Backend API Documentation
@@ -6,6 +6,10 @@ This application aims to improve financial management by helping users track and
 ## Overview
 This backend API provides user management, expense tracking, bank account handling, financial planning, and transactions management (WIP). It includes specific CRUD endpoints for records related to users, expenses, bank accounts, financial plans, and transactions.
 Additionaly, the user controller also handles Spring Security specific endpoints: `/login` and `/register`, which generate and validate a unique Bearer Token.
+
+As mentioned previously, Spring Security helps with implementing the **JWT (JSON Web Token) authentication** approach, ensuring that only authenticated and authorized users can access protected resources. It is structured into several components, including configurations for JWT setup, request filtering, and authentication services.
+
+JWT authentication works by issuing a signed token upon successful user login. This token is included in subsequent requests, allowing the server to validate user identity without maintaining session state. A security filter intercepts requests, extracts, and verifies the token before granting access. Password encryption is also implemented to enhance security.
 
 ## Endpoints
 
@@ -74,21 +78,6 @@ Additionaly, the user controller also handles Spring Security specific endpoints
 | POST | `/save` | Creates a new transaction |
 | DELETE | `/delete/{transactionId}` | Deletes a transaction by ID |
 | DELETE | `/delete-all/{bankAccountId}` | Deletes all transactions for a bank account |
-
----
-
-# Global Exception Handler
-
-## Overview
-The `GlobalExceptionHandler` is a centralized error-handling mechanism for the backend API. It ensures consistent and meaningful error responses across the application, improving robustness and maintainability.
-
----
-
-# Security Module (JWT-Based Authentication)
-
-As mentioned previously, Spring Security helps with implementing the **JWT (JSON Web Token) authentication** approach, ensuring that only authenticated and authorized users can access protected resources. It is structured into several components, including configurations for JWT setup, request filtering, and authentication services.
-
-JWT authentication works by issuing a signed token upon successful user login. This token is included in subsequent requests, allowing the server to validate user identity without maintaining session state. A security filter intercepts requests, extracts, and verifies the token before granting access. Password encryption is also implemented to enhance security.
 
 ---
 
