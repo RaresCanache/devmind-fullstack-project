@@ -22,7 +22,6 @@ public class TransactionController {
         return ResponseEntity.ok(transactionService.getTransactionById(transactionId));
     }
 
-    //TODO modify response DTO
     @GetMapping("/bank-account/{bankAccountId}")
     public ResponseEntity<List<Transaction>> getTransactionByBankAccountId(@PathVariable Integer bankAccountId) {
         return ResponseEntity.ok(transactionService.getAllTransactionsByBankAccountId(bankAccountId));

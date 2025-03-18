@@ -26,14 +26,11 @@ const Login = () => {
             }
             const tokenData = await tokenResponse.json();
 
-            console.log(tokenData.token);
-
             const userResponse = await getUserByEmail(email, tokenData.token);
             if (!userResponse.ok) {
                 throw new Error(`No existing user with email: ${email}`);
             }
             const userData = await userResponse.json();
-            console.log(userData);
 
             dispatch(setUserAndToken({
                 user: userData,
