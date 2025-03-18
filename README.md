@@ -1,23 +1,23 @@
-# Financial Calendar app
+# Financial Calendar App
 This application aims to improve financial management by helping users track and optimize their savings over time. The app calculates a personalized daily spending limit based on the user’s monthly income, estimated expenses, and savings goals, enabling better budget control and a structured financial plan.
 
 ---
 
-# Demo presentation
+# Demo Presentation
 
-## Main page
+## Main Page
 
 ![image](https://github.com/user-attachments/assets/964fa17b-748a-4c93-9cf6-8c376fdc2ee2)
 
 ---
 
-## Register page
+## Register Page
 
 ![image](https://github.com/user-attachments/assets/660ec009-0d1d-49a3-819c-3f5f243d2423)
 
 ---
 
-## Add bank account
+## Add Bank Account
 
 The account balance is the monthly income of a user
 
@@ -25,7 +25,7 @@ The account balance is the monthly income of a user
 
 ---
 
-## Add financial plan
+## Add Financial Plan
 
 Starting date: 01-04-2025  
 End date: 30-04-2025  
@@ -35,7 +35,7 @@ Amount to be saved: 1000 RON
 
 ---
 
-## Add expense/expenses
+## Add Expense/expenses
 
 ![image](https://github.com/user-attachments/assets/7790a532-d9c6-40a5-aa16-b9f4ac6623d1)
 
@@ -59,11 +59,17 @@ As mentioned previously, Spring Security helps with implementing the **JWT (JSON
 
 ---
 
-## Internal database diagram
+## Internal Database Diagram
 
 ![image](https://github.com/user-attachments/assets/2dab8642-6a55-4354-9b17-fdaca1da278a)
 
 ---
+
+## Technologies Used
+
+* Back-End: Java, Spring Boot, Spring MVC, REST API, Spring Data with Hibernate ORM, Spring Security with JWT Authentication
+* Front-End: Node.js, React.js, Javascript, HTML, CSS
+* Database: MySQL Workbench
 
 ## Endpoints
 
@@ -140,7 +146,7 @@ As mentioned previously, Spring Security helps with implementing the **JWT (JSON
 ## Overview
 The **SavingsServiceImpl** is responsible for computing the **daily required savings balance** based on a user's financial plan, expenses, and bank account balance. It ensures that the user stays on track with their financial goals by calculating a structured savings plan.
 
-## Key Functionalities
+## How It Works
 
 * The financial plan duration is calculated using **ChronoUnit.DAYS** to determine the total number of days.
 * Total expenses are summed using a **reduce function**.
