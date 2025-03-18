@@ -57,8 +57,6 @@ Additionaly, the user controller also handles Spring Security specific endpoints
 
 As mentioned previously, Spring Security helps with implementing the **JWT (JSON Web Token) authentication** approach, ensuring that only authenticated and authorized users can access protected resources. It is structured into several components, including configurations for JWT setup, request filtering, and authentication services.
 
-JWT authentication works by issuing a signed token upon successful user login. This token is included in subsequent requests, allowing the server to validate user identity without maintaining session state. A security filter intercepts requests, extracts, and verifies the token before granting access. Password encryption is also implemented to enhance security.
-
 ---
 
 ## Internal database diagram
